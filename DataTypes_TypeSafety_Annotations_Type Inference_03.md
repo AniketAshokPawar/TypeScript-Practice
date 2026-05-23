@@ -137,3 +137,13 @@ Type 'string' is not assignable to type 'number'
 TypeScript code finally converts into JavaScript.
 
 Type checking exists only during development/compilation.
+
+
+
+
+
+
+
+
+
+
