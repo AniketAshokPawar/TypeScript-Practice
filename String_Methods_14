@@ -1,0 +1,453 @@
+# String Methods in TypeScript
+
+A string is a sequence of characters enclosed in single quotes (`''`), double quotes (`""`), or backticks (````).
+
+```ts
+let name:string = "Aniket";
+```
+
+---
+
+# 1. length
+
+Used to get total number of characters in a string.
+
+## Syntax
+
+```ts
+string.length
+```
+
+## Example
+
+```ts
+let name:string = "Aniket";
+
+console.log(name.length);
+```
+
+### Output
+
+```text
+6
+```
+
+---
+
+# 2. indexOf()
+
+Used to find the index position of a character or substring.
+
+Returns:
+- Index if found
+- -1 if not found
+
+## Syntax
+
+```ts
+string.indexOf(value);
+```
+
+## Example
+
+```ts
+let name:string = "Aniket";
+
+console.log(name.indexOf("k"));
+```
+
+### Output
+
+```text
+3
+```
+
+---
+
+# 3. charAt()
+
+Used to get character at a specific index.
+
+## Syntax
+
+```ts
+string.charAt(index);
+```
+
+## Example
+
+```ts
+let name:string = "Aniket";
+
+console.log(name.charAt(2));
+```
+
+### Output
+
+```text
+i
+```
+
+---
+
+# 4. substring()
+
+Used to extract part of a string.
+
+End index is excluded.
+
+## Syntax
+
+```ts
+string.substring(start,end);
+```
+
+## Example
+
+```ts
+let text:string = "Automation";
+
+console.log(text.substring(0,4));
+```
+
+### Output
+
+```text
+Auto
+```
+
+---
+
+# 5. toUpperCase()
+
+Converts string to uppercase.
+
+## Syntax
+
+```ts
+string.toUpperCase();
+```
+
+## Example
+
+```ts
+let name:string = "aniket";
+
+console.log(name.toUpperCase());
+```
+
+### Output
+
+```text
+ANIKET
+```
+
+---
+
+# 6. toLowerCase()
+
+Converts string to lowercase.
+
+## Syntax
+
+```ts
+string.toLowerCase();
+```
+
+## Example
+
+```ts
+let name:string = "ANIKET";
+
+console.log(name.toLowerCase());
+```
+
+### Output
+
+```text
+aniket
+```
+
+---
+
+# 7. includes()
+
+Checks whether a string contains specified text.
+
+Returns:
+```text
+true / false
+```
+
+## Syntax
+
+```ts
+string.includes(value);
+```
+
+## Example
+
+```ts
+let text:string = "Automation Testing";
+
+console.log(text.includes("Testing"));
+```
+
+### Output
+
+```text
+true
+```
+
+---
+
+# 8. startsWith()
+
+Checks whether string starts with specified text.
+
+Returns:
+```text
+true / false
+```
+
+## Syntax
+
+```ts
+string.startsWith(value);
+```
+
+## Example
+
+```ts
+let text:string = "Playwright";
+
+console.log(text.startsWith("Play"));
+```
+
+### Output
+
+```text
+true
+```
+
+---
+
+# 9. endsWith()
+
+Checks whether string ends with specified text.
+
+Returns:
+```text
+true / false
+```
+
+## Syntax
+
+```ts
+string.endsWith(value);
+```
+
+## Example
+
+```ts
+let text:string = "Playwright";
+
+console.log(text.endsWith("right"));
+```
+
+### Output
+
+```text
+true
+```
+
+---
+
+# 10. replace()
+
+Used to replace text in a string.
+
+## Syntax
+
+```ts
+string.replace(oldValue,newValue);
+```
+
+## Example
+
+```ts
+let text:string = "Hello Aniket";
+
+console.log(text.replace("Aniket","Rahul"));
+```
+
+### Output
+
+```text
+Hello Rahul
+```
+
+---
+
+# 11. split()
+
+Converts string into an array.
+
+## Syntax
+
+```ts
+string.split(separator);
+```
+
+## Example
+
+```ts
+let text:string = "Apple,Banana,Mango";
+
+console.log(text.split(","));
+```
+
+### Output
+
+```text
+["Apple","Banana","Mango"]
+```
+
+---
+
+# 12. trim()
+
+Removes spaces from both beginning and end.
+
+## Syntax
+
+```ts
+string.trim();
+```
+
+## Example
+
+```ts
+let text:string = "   Aniket   ";
+
+console.log(text.trim());
+```
+
+### Output
+
+```text
+Aniket
+```
+
+---
+
+# 13. trimStart()
+
+Removes spaces from beginning only.
+
+## Syntax
+
+```ts
+string.trimStart();
+```
+
+## Example
+
+```ts
+let text:string = "   Aniket";
+
+console.log(text.trimStart());
+```
+
+### Output
+
+```text
+Aniket
+```
+
+---
+
+# 14. trimEnd()
+
+Removes spaces from end only.
+
+## Syntax
+
+```ts
+string.trimEnd();
+```
+
+## Example
+
+```ts
+let text:string = "Aniket   ";
+
+console.log(text.trimEnd());
+```
+
+### Output
+
+```text
+Aniket
+```
+
+---
+
+# 15. concat()
+
+Used to join two or more strings.
+
+## Syntax
+
+```ts
+string1.concat(string2);
+```
+
+## Example
+
+```ts
+let fname:string = "Aniket";
+let lname:string = " Pawar";
+
+console.log(fname.concat(lname));
+```
+
+### Output
+
+```text
+Aniket Pawar
+```
+
+---
+
+# Quick Revision Table
+
+| Method | Purpose | Return Type |
+|----------|----------|----------|
+| length | Count characters | number |
+| indexOf() | Find index position | number |
+| charAt() | Get character at index | string |
+| substring() | Extract part of string | string |
+| toUpperCase() | Convert to uppercase | string |
+| toLowerCase() | Convert to lowercase | string |
+| includes() | Check existence | boolean |
+| startsWith() | Check starting text | boolean |
+| endsWith() | Check ending text | boolean |
+| replace() | Replace text | string |
+| split() | Convert string to array | array |
+| trim() | Remove spaces both sides | string |
+| trimStart() | Remove spaces from start | string |
+| trimEnd() | Remove spaces from end | string |
+| concat() | Join strings | string |
+
+---
+
+# Interview Notes
+
+- Strings are immutable (original string does not change).
+- Most string methods return a new string.
+- `indexOf()` returns `-1` when value is not found.
+- `includes()`, `startsWith()`, and `endsWith()` return boolean values.
+- `split()` converts string into array.
+- `trim()`, `trimStart()`, and `trimEnd()` are useful for handling user input.
+- String methods are frequently used in Playwright for text validations and assertions.
