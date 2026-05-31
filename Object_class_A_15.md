@@ -249,3 +249,149 @@ let emp1 = new Employee("Aniket", 30000);
 
 emp1.display();
 ```
+
+
+# Readonly Property
+
+A `readonly` property can be assigned a value only once. After initialization, its value cannot be changed.
+
+### Example
+
+```ts
+readonly rollNumber: number;
+```
+
+Value is assigned in the constructor:
+
+```ts
+this.rollNumber = rollNumber;
+```
+
+Valid:
+
+```ts
+let s1 = new student(12, "Aniket", 85, "Satara");
+```
+
+Invalid:
+
+```ts
+s2.rollNumber = 14;
+```
+
+Output:
+
+```text
+Cannot assign to 'rollNumber' because it is a read-only property.
+```
+
+### Use Cases
+
+- Student Roll Number
+- Employee ID
+- Account Number
+- Product ID
+
+These values should remain fixed after object creation.
+
+---
+
+# Optional Property
+
+An optional property is declared using the `?` symbol. It means the property is not mandatory while creating an object.
+
+### Example
+
+```ts
+city?: string;
+```
+
+Object with city:
+
+```ts
+let s1 = new student(12, "Aniket", 85, "Satara");
+```
+
+Object without city:
+
+```ts
+let s2 = new student(13, "Andy", 89);
+```
+
+Both objects are valid because `city` is optional.
+
+### Handling Optional Property
+
+```ts
+if (this.city) {
+    console.log(`city: ${this.city}`);
+}
+else {
+    console.log("City is not provided.");
+}
+```
+
+If `city` is supplied, it is displayed. Otherwise, a default message is shown.
+
+### Use Cases
+
+- City
+- Address
+- Phone Number
+- Middle Name
+
+These details may not always be available.
+
+---
+### Complete example
+
+```ts
+class student{
+
+    readonly rollNumber:number; // Read only variable - can assign value only once
+    name:string;
+    marks:number;
+    city?:string; // Can skip this 
+
+    constructor(rollNumber:number,name:string,marks:number, city?:string){
+        this.rollNumber = rollNumber;
+        this.name = name;
+        this.marks = marks;
+        this.city = city;
+    }
+
+    displayDetails(){
+
+        console.log(`rollNumber: ${this.rollNumber}`);
+        console.log(`name: ${this.name}`);
+        console.log(`marks: ${this.marks}`);
+
+        if(this.city){
+            console.log(`city: ${this.city}`);
+        }
+        else{
+            console.log("City is not provided.");
+        }
+        
+    }
+
+}
+
+let s1 = new student(12,"Aniket",85,"Satara"); // regular object
+s1.displayDetails();
+
+let s2 = new student(13,"Andy",89); // skipped city parameter
+s2.displayDetails();
+
+s2.marks = 94;
+s2.rollNumber = 14; // error - Cannot assign to 'rollNumber' because it is a read-only property.
+s2.displayDetails();
+```
+# Key Difference
+
+| Readonly Property | Optional Property |
+|------------------|------------------|
+| Value must be provided and cannot be changed later. | Value may or may not be provided. |
+| Uses `readonly` keyword. | Uses `?` symbol. |
+| Example: `readonly rollNumber:number` | Example: `city?:string` |
+| `s2.rollNumber = 14` ❌ Error | `new student(13,"Andy",89)` ✅ Valid |
