@@ -552,3 +552,106 @@ s1.changeSchoolName("SSOEP");
 s1.displayDetails();
 
 ```
+
+---
+
+# Method Overloading in TypeScript
+
+Method overloading allows a method to be called in multiple ways by defining multiple method signatures with different parameters.
+
+TypeScript supports method overloading using:
+
+1. Multiple overload signatures
+2. One common implementation method
+
+---
+
+## Syntax
+
+```ts
+method(param1: type): returnType;
+method(param1: type, param2: type): returnType;
+
+method(param1: type, param2?: type): returnType {
+    // implementation
+}
+```
+
+---
+
+## Example
+
+```ts
+class Calculator {
+
+    add(a: number, b: number): number;
+    add(a: number, b: number, c: number): number;
+
+    add(a: number, b: number, c?: number): number {
+
+        if (c !== undefined) {
+            return a + b + c;
+        }
+
+        return a + b;
+    }
+}
+```
+
+Usage:
+
+```ts
+const calc = new Calculator();
+
+calc.add(10, 20);      // 30
+calc.add(10, 20, 30);  // 60
+```
+
+---
+
+## Important Rules
+
+### 1. Multiple Signatures Allowed
+
+```ts
+add(a: number, b: number): number;
+add(a: number, b: number, c: number): number;
+```
+
+These define the valid ways to call the method.
+
+---
+
+### 2. Only One Implementation
+
+```ts
+add(a: number, b: number, c?: number): number {
+    // logic
+}
+```
+
+The implementation must handle all overload cases.
+
+---
+
+### 3. Invalid Calls Produce Errors
+
+```ts
+calc.add(10);              // Error
+calc.add("10", "20");      // Error
+calc.add(10, 20, 30, 40);  // Error
+```
+
+---
+
+## Advantages
+
+- Improves code readability.
+- Allows the same method to handle different parameter combinations.
+- Provides better type checking and IntelliSense support.
+
+---
+
+## Key Point
+
+In TypeScript, method overloading exists only at compile time. At runtime, there is only one actual implementation method.
