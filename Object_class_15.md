@@ -395,3 +395,160 @@ s2.displayDetails();
 | Uses `readonly` keyword. | Uses `?` symbol. |
 | Example: `readonly rollNumber:number` | Example: `city?:string` |
 | `s2.rollNumber = 14` ❌ Error | `new student(13,"Andy",89)` ✅ Valid |
+
+
+
+# Static Properties and Static Methods in TypeScript
+
+## Static Property
+
+A static property belongs to the **class itself**, not to individual objects. All objects of the class share the same static property value.
+
+### Syntax
+
+```ts
+static propertyName: dataType = value;
+```
+
+### Example
+
+```ts
+static schoolName: string = "ABC Public School";
+```
+
+Accessing static property:
+
+```ts
+console.log(Student.schoolName);
+```
+
+---
+
+## Static Method
+
+A static method belongs to the **class**, not to objects. It can access static properties and is called using the class name.
+
+### Syntax
+
+```ts
+static methodName() {
+    // code
+}
+```
+
+### Example
+
+```ts
+static displaySchoolName() {
+    console.log(`School Name: ${Student.schoolName}`);
+}
+```
+
+Calling static method:
+
+```ts
+Student.displaySchoolName();
+```
+
+---
+
+## Why Use Static Members?
+
+Use static members when a value or functionality should be common to all objects.
+
+Examples:
+
+- School Name
+- Company Name
+- Tax Rate
+- Utility Methods
+
+---
+
+## Important Rules
+
+### Access using Class Name
+
+```ts
+Student.schoolName;
+Student.displaySchoolName();
+```
+
+### Cannot Access using Object
+
+```ts
+s1.schoolName;          // Error
+s1.displaySchoolName(); // Error
+```
+
+Static members belong to the class, not to individual objects.
+
+---
+
+## Example
+
+```ts
+class Student {
+
+    static schoolName: string = "ABC Public School";
+
+    name: string;
+    marks: number;
+
+    constructor(name: string, marks: number) {
+        this.name = name;
+        this.marks = marks;
+    }
+
+    static displaySchoolName() {
+        console.log(`School Name: ${Student.schoolName}`);
+    }
+}
+```
+
+---
+
+## Key Difference
+
+| Regular Property/Method | Static Property/Method |
+|------------------------|------------------------|
+| Belongs to an object | Belongs to the class |
+| Access using object | Access using class name |
+| Each object has its own copy | Shared by all objects |
+| Example: `name`, `marks` | Example: `schoolName` |
+
+
+## Complete example
+```ts
+class student{
+
+    name:string;
+    id:number;
+    age:number;
+    static schoolName:string = "NESS";
+
+    constructor(name:string,id:number,age:number){
+
+            this.name = name;
+            this.id = id;
+            this.age = age;
+    }
+
+    displayDetails(){
+        console.log(`Name: ${this.name} \nID: ${this.id} \n Age: ${this.age} \nSchool name: ${student.schoolName}`);
+    }
+
+    changeSchoolName(Sname:string){
+        student.schoolName = Sname;
+    }
+}
+
+let s1 = new student("Aniket",101,27);
+
+s1.displayDetails();
+
+s1.changeSchoolName("SSOEP");
+
+s1.displayDetails();
+
+```
