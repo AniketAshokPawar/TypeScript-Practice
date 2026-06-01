@@ -655,3 +655,202 @@ calc.add(10, 20, 30, 40);  // Error
 ## Key Point
 
 In TypeScript, method overloading exists only at compile time. At runtime, there is only one actual implementation method.
+
+---
+
+# Inheritance, Method Overriding and super Keyword
+
+## Inheritance
+
+Inheritance allows a child class to acquire the properties and methods of a parent class using the `extends` keyword.
+
+### Example
+
+```ts
+class student extends person
+```
+
+Here, `student` inherits:
+
+- `name`
+- `age`
+- `displayDetails()`
+
+from the `person` class.
+
+---
+
+## super Keyword
+
+The `super` keyword is used inside a child class to access members of the parent class.
+
+### Calling Parent Constructor
+
+```ts
+super(name, age);
+```
+
+This invokes the constructor of the `person` class and initializes the inherited properties.
+
+Without `super()`, the child class cannot access or initialize parent class properties.
+
+### Calling Parent Method
+
+```ts
+super.displayDetails();
+```
+
+This invokes the `displayDetails()` method of the parent class from inside the child class.
+
+---
+
+## Method Overriding
+
+Method overriding occurs when a child class provides its own implementation of a method already present in the parent class.
+
+### Parent Method
+
+```ts
+displayDetails() {
+    console.log(`Name: ${this.name} \n Age: ${this.age}`);
+}
+```
+
+### Child Method (Overridden)
+
+```ts
+displayDetails() {
+
+    super.displayDetails();
+    console.log(`${this.marks}`);
+}
+```
+
+When `displayDetails()` is called on a `student` object, the child class version executes instead of the parent version.
+
+---
+
+## Accessing Parent Properties Through Child Object
+
+Since `student` inherits `person`, the child object can access parent properties.
+
+### Example
+
+```ts
+let s1 = new student("Aniket", 27, 85);
+
+console.log(s1.name);
+console.log(s1.age);
+console.log(s1.marks);
+```
+
+---
+
+## Parent Reference Holding Child Object
+
+```ts
+let per: person = new student("Anik", 28, 99);
+```
+
+- Reference Type = `person`
+- Object Type = `student`
+
+A parent reference can store a child object.
+
+### Valid
+
+```ts
+per.displayDetails();
+```
+
+Because `displayDetails()` exists in the `person` class.
+
+### Invalid
+
+```ts
+per.displayDetails2();
+```
+
+Error:
+
+```text
+Property 'displayDetails2' does not exist on type 'person'
+```
+
+because `displayDetails2()` is only available in the `student` class.
+
+---
+
+## Key Points
+
+- `extends` is used for inheritance.
+- `super()` calls the parent class constructor.
+- `super.methodName()` calls a parent class method.
+- A child class can override parent methods.
+- A parent reference can hold a child object.
+- A parent reference can access only members declared in the parent class.
+- When an overridden method is called, the child class implementation executes (runtime polymorphism).
+
+
+---
+
+## Example
+
+```ts
+// inheritance, method overriding, super keyword to invoke parent class constructor properties
+
+// Parent class
+
+class person{
+
+    name:string;
+    age:number;
+
+    constructor(name:string, age:number){
+
+        this.name = name;
+        this.age = age;
+    }
+
+    displayDetails(){
+
+        console.log(`Name: ${this.name} \n Age: ${this.age}`);
+    }
+    displayDetails2(){
+        console.log("Extra function only in parent function");
+    }
+}
+
+// Child class
+
+class student extends person{
+
+    marks:number;
+
+    constructor(name:string, age:number,marks:number){
+
+        super(name,age);                                // using parent class constructor properties using super keyword
+        this.marks = marks;
+    }
+
+// Method overriding
+
+    displayDetails(){
+
+        super.displayDetails();
+        console.log(`${this.marks}`)
+    }
+    displayDetails3(){
+        console.log("Extra .....function");
+    }
+}
+
+let s1 = new student("Aniket", 27,85);
+s1.displayDetails();
+
+s1.displayDetails2(); // accessing method from parent class into child class
+
+let per:person = new student("Anik", 28, 99);
+//per.displayDetails3(); // give error - Property 'displayDetails3' does not exist on type 'person'.
+```
+---
