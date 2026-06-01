@@ -854,3 +854,190 @@ let per:person = new student("Anik", 28, 99);
 //per.displayDetails3(); // give error - Property 'displayDetails3' does not exist on type 'person'.
 ```
 ---
+
+# Access Modifiers in TypeScript
+
+Access modifiers control the visibility and accessibility of class properties and methods.
+
+TypeScript provides three access modifiers:
+
+- `public`
+- `protected`
+- `private`
+
+---
+
+# Public Access Modifier
+
+A `public` member can be accessed from anywhere:
+
+- Inside the same class
+- Inside child classes
+- Through objects
+
+### Example
+
+```ts
+public name: string;
+```
+
+Accessing through object:
+
+```ts
+console.log(s1.name);
+```
+
+### Use Cases
+
+- Name
+- Email
+- Product Name
+
+Properties that should be accessible to everyone.
+
+---
+
+# Protected Access Modifier
+
+A `protected` member can be accessed:
+
+- Inside the same class
+- Inside child classes
+
+It cannot be accessed directly through an object.
+
+### Example
+
+```ts
+protected age: number;
+```
+
+Access inside child class:
+
+```ts
+console.log(this.age);
+```
+
+Invalid access:
+
+```ts
+console.log(s1.age);
+```
+
+Error:
+
+```text
+Property 'age' is protected and only accessible within class 'Person' and its subclasses.
+```
+
+### Use Cases
+
+- Employee Details
+- Student Information
+- Internal Data Needed by Child Classes
+
+---
+
+# Private Access Modifier
+
+A `private` member can be accessed only inside the class where it is declared.
+
+It cannot be accessed:
+
+- Through objects
+- Inside child classes
+
+### Example
+
+```ts
+private salary: number;
+```
+
+Valid:
+
+```ts
+showSalary() {
+    console.log(this.salary);
+}
+```
+
+Invalid:
+
+```ts
+console.log(this.salary); // Inside child class
+console.log(s1.salary);   // Through object
+```
+
+Error:
+
+```text
+Property 'salary' is private and only accessible within class 'Person'.
+```
+### Complete Example
+
+```ts
+
+class person{
+
+    public name:string;    // available to all
+    protected age: number; // only in parent and there child class
+    private salary:number; // only in current class
+
+    constructor(name:string,age:number,salary:number){
+
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+    }
+
+    showSalary(){
+        console.log(`Salary: ${this.salary}`);
+    }
+} 
+
+class student extends person{
+
+    displaydetails(){
+        console.log(`Name: ${this.name}`);
+        console.log(`Age: ${this.age}`);
+        //console.log(`salary: ${this.salary}`); // Property 'salary' is private and only accessible within class 'person'.
+    }
+}
+
+let s1 = new student("Aniket", 27,30000);
+
+s1.displaydetails();
+s1.showSalary();
+
+console.log(s1.name);
+//console.log(s1.age); // Property 'age' is protected and only accessible within class 'person' and its subclasses.
+//console.log(s1.salary); //Property 'salary' is private and only accessible within class 'person'.
+
+```
+
+### Use Cases
+
+- Salary
+- Password
+- Bank Balance
+- Sensitive Data
+
+---
+
+# Accessibility Table
+
+| Modifier | Same Class | Child Class | Object |
+|-----------|-----------|-----------|---------|
+| `public` | ✅ | ✅ | ✅ |
+| `protected` | ✅ | ✅ | ❌ |
+| `private` | ✅ | ❌ | ❌ |
+
+---
+
+# Key Points
+
+- `public` → Accessible everywhere.
+- `protected` → Accessible inside the class and child classes only.
+- `private` → Accessible only inside the same class.
+- Access modifiers help implement data hiding and encapsulation.
+- If no access modifier is specified, TypeScript uses `public` by default.
