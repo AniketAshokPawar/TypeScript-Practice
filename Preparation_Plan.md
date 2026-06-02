@@ -613,3 +613,181 @@ By the end of preparation, you should be able to:
 - Answer Manual Testing Questions
 - Answer TypeScript OOP Questions
 - Crack 1-Year Experience Automation Testing Interviews
+
+---
+
+# Automation Testing Preparation Timeline
+
+## Start Date
+
+**02 June 2026**
+
+---
+
+# Phase 1: TypeScript
+
+### Duration
+02 Jun 2026 → 22 Jun 2026
+
+### Topics
+
+- TypeScript Basics
+- Arrays
+- Objects
+- Functions
+- OOP
+- Access Modifiers
+- Inheritance
+- Interfaces
+- Modules
+- Promises
+- Async/Await
+- Exception Handling
+
+### Completion Target
+
+✅ 22 Jun 2026
+
+---
+
+# Phase 2: Playwright Core
+
+### Duration
+23 Jun 2026 → 27 Jul 2026
+
+### Topics
+
+- Playwright Architecture
+- Locators
+- Assertions
+- Waits
+- Web Elements
+- Alerts
+- Frames
+- Multiple Windows
+- Upload/Download
+- Mouse Actions
+- Keyboard Actions
+- Screenshots
+- Videos
+- Hooks
+- Fixtures
+- Tags
+- Retry
+- Parallel Execution
+- Reporting
+
+### Completion Target
+
+✅ 27 Jul 2026
+
+---
+
+# Phase 3: Framework Design
+
+### Duration
+28 Jul 2026 → 10 Aug 2026
+
+### Topics
+
+- POM
+- Utility Classes
+- Base Page
+- Test Data Management
+- Environment Variables
+- Framework Structure
+
+### Completion Target
+
+✅ 10 Aug 2026
+
+---
+
+# Phase 4: Supporting Technologies
+
+### Duration
+11 Aug 2026 → 21 Aug 2026
+
+### Topics
+
+- Git
+- SQL
+- Jenkins
+- CI/CD Basics
+- API Testing Basics
+
+### Completion Target
+
+✅ 21 Aug 2026
+
+---
+
+# Phase 5: Complete Project
+
+### Duration
+22 Aug 2026 → 31 Aug 2026
+
+### Topics
+
+- Build Complete Framework
+- POM Implementation
+- API Tests
+- Reporting
+- Screenshots
+- Retry
+- Parallel Execution
+
+### Completion Target
+
+✅ 31 Aug 2026
+
+---
+
+# Revision Period
+
+### Duration
+01 Sep 2026 → 15 Sep 2026
+
+### Focus
+
+- Playwright
+- TypeScript
+- Manual Testing
+- Git
+- SQL
+- Jenkins
+- Interview Questions
+
+### Completion Target
+
+✅ 15 Sep 2026
+
+---
+
+# Interview Preparation Phase
+
+### Duration
+16 Sep 2026 Onwards
+
+### Activities
+
+- Resume Update
+- Naukri Update
+- LinkedIn Update
+- Job Applications
+- Mock Interviews
+- Real Interviews
+
+---
+
+# Final Milestones
+
+| Date | Target |
+|--------|--------|
+| 22 Jun 2026 | TypeScript Complete |
+| 27 Jul 2026 | Playwright Complete |
+| 10 Aug 2026 | Framework Design Complete |
+| 21 Aug 2026 | Git + SQL + Jenkins Complete |
+| 31 Aug 2026 | Project Complete |
+| 15 Sep 2026 | Revision Complete |
+| 16 Sep 2026 | Start Interview Applications |
