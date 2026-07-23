@@ -14,7 +14,7 @@ It adds **static typing**, **interfaces**, **classes**, and **better error check
 
 Playwright supports **both JavaScript and TypeScript**, but TypeScript is preferred because:
 
-1. **Static typing**: Helps catch errors while writing automation scripts.
+1. **Static typing**: The data type of a variable is checked before running the program (during development/compilation).
 2. **Better IDE support**: Auto-completion, IntelliSense, and code hints.
 3. **Structured code**: Easier to manage large test suites.
 4. **Playwright typings**: TypeScript knows element locators, page objects, and fixtures automatically.
