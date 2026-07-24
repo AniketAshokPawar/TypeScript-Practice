@@ -332,3 +332,189 @@ Welcome Aniket
 - Keep functions small and focused
 - Define proper parameter types
 - Define return types clearly
+
+---
+
+# Functions in TypeScript - VVIP Interview Questions
+
+---
+
+## Q1. What is a function and why do we use it?
+
+### Answer
+
+A function is a reusable block of code that performs a specific task.
+
+We use functions to:
+- Avoid duplicate code
+- Improve readability
+- Make code easier to maintain
+
+### Interview Answer (Short)
+
+> "A function is a reusable block of code. It helps avoid duplicate code and makes the automation framework easier to maintain."
+
+---
+
+## Q2. Why are functions heavily used in Playwright frameworks?
+
+### Answer
+
+Almost every action in Playwright is written as a function.
+
+Examples:
+- login()
+- logout()
+- click()
+- fill()
+- takeScreenshot()
+- waitForLoader()
+
+### Interview Answer (Short)
+
+> "Playwright frameworks use functions to make actions reusable. Instead of writing the same code in every test, we create methods and call them whenever needed."
+
+---
+
+## Q3. What is the difference between a parameter and an argument?
+
+### Answer
+
+- **Parameter** → Variable defined in the function.
+- **Argument** → Actual value passed while calling the function.
+
+Example:
+
+```ts
+function login(username: string) // username = Parameter
+
+login("admin"); // "admin" = Argument
+```
+
+### Interview Answer (Short)
+
+> "A parameter is declared in the function definition, while an argument is the value passed when calling the function."
+
+---
+
+## Q4. What is the difference between `void` and a return type?
+
+### Answer
+
+- `void` → Function does not return any value.
+- Return type (`string`, `number`, `boolean`, etc.) → Function returns a value.
+
+### Interview Answer (Short)
+
+> "`void` means the function performs an action but returns nothing. A return type means the function sends a value back to the caller."
+
+---
+
+## Q5. When should you return a value instead of using `console.log()`?
+
+### Answer
+
+Use `return` when the result may be used later.
+
+Use `console.log()` only for displaying output.
+
+### Interview Answer (Short)
+
+> "I prefer returning values because the caller can reuse them. `console.log()` is mainly for debugging or displaying output."
+
+---
+
+## Q6. What are rest parameters? When have you used them?
+
+### Answer
+
+Rest parameters (`...`) allow a function to accept a variable number of arguments.
+
+Example:
+
+```ts
+function add(...numbers: number[])
+```
+
+### Interview Answer (Short)
+
+> "Rest parameters are useful when I don't know how many values will be passed. They collect all values into an array."
+
+---
+
+## Q7. What is the difference between optional parameters and default parameters?
+
+### Answer
+
+| Optional (`?`) | Default (`=`) |
+|---------------|---------------|
+| May be `undefined` | Gets a default value |
+| Uses `?` | Uses `=` |
+
+### Interview Answer (Short)
+
+> "Optional parameters may be omitted and become `undefined`, whereas default parameters automatically receive a predefined value."
+
+---
+
+## Q8. Where have you used functions in your Playwright framework?
+
+### Answer
+
+Examples:
+- LoginPage methods
+- BasePage common actions
+- Utility methods
+- Hooks
+- Helper methods
+
+### Interview Answer (Short)
+
+> "I have used functions in Page Objects, BasePage, utility classes, and hooks to keep the framework reusable and maintainable."
+
+---
+
+## Q9. Why do we keep common methods in BasePage instead of writing them in every Page Object?
+
+### Answer
+
+Common methods like `click()`, `fill()`, and `waitForElement()` are used across many pages.
+
+Keeping them in BasePage:
+- Avoids duplicate code
+- Improves maintainability
+- Makes updates easier
+
+### Interview Answer (Short)
+
+> "BasePage stores common actions so all page classes can reuse them. This avoids duplication and makes maintenance easier."
+
+---
+
+## Q10. Can a function have multiple return statements?
+
+### Answer
+
+Yes.
+
+A function can contain multiple `return` statements, but only one is executed depending on the condition.
+
+Example:
+
+```ts
+function checkAge(age: number): string {
+
+    if(age >= 18){
+
+        return "Eligible";
+
+    }
+
+    return "Not Eligible";
+
+}
+```
+
+### Interview Answer (Short)
+
+> "Yes. A function can have multiple `return` statements, but only one executes based on the condition."
