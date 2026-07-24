@@ -225,3 +225,249 @@ switch(day){
 - Avoid deeply nested conditions when possible
 - Always use `break` in switch cases
 - Add `default` case in switch statements
+
+---
+
+# Conditional Statements in TypeScript - Interview Questions
+
+---
+
+## Q1. What are conditional statements in TypeScript?
+
+### Answer:
+
+Conditional statements are used to execute different blocks of code based on a condition.
+
+Common conditional statements are:
+
+- `if`
+- `if-else`
+- Nested `if-else`
+- `switch`
+
+---
+
+### Interview Answer (Short)
+
+> "Conditional statements help us make decisions in code based on whether a condition is true or false."
+
+---
+
+## Q2. What is the difference between `if` and `if-else`?
+
+### Answer:
+
+- `if` executes code only when the condition is true.
+- `if-else` provides two possible outcomes: one for true and one for false.
+
+Example:
+
+```typescript
+if(age >= 18){
+    console.log("Eligible");
+}
+else{
+    console.log("Not Eligible");
+}
+```
+
+---
+
+### Interview Answer (Short)
+
+> "`if` is used when only the true condition matters, while `if-else` is used when we need separate actions for both true and false conditions."
+
+---
+
+## Q3. What is Nested if-else? When do you use it?
+
+### Answer:
+
+Nested `if-else` means placing one `if` statement inside another.
+
+It is useful when multiple conditions must be checked one after another.
+
+Example:
+
+```typescript
+if(username === "admin"){
+
+    if(password === "admin123"){
+
+        console.log("Login Successful");
+
+    }
+
+}
+```
+
+---
+
+### Interview Answer (Short)
+
+> "Nested if-else is used when one condition depends on another, such as validating username first and then password."
+
+---
+
+## Q4. What is a switch statement? When should you use it?
+
+### Answer:
+
+A `switch` statement is used when checking one variable against multiple fixed values.
+
+Example:
+
+```typescript
+switch(browser){
+
+    case "Chrome":
+        break;
+
+    case "Firefox":
+        break;
+
+    default:
+        console.log("Unsupported Browser");
+}
+```
+
+---
+
+### Interview Answer (Short)
+
+> "I use switch when there are multiple fixed options, such as browser names or environments."
+
+---
+
+## Q5. When would you choose `switch` instead of `if-else`?
+
+### Answer:
+
+Use:
+
+- `switch` → Multiple fixed values
+- `if-else` → Ranges or complex conditions
+
+Example:
+
+✅ Good for switch
+
+```typescript
+browser = "Chrome"
+```
+
+✅ Good for if-else
+
+```typescript
+age >= 18
+```
+
+---
+
+### Interview Answer (Short)
+
+> "I use switch for fixed values like browser names, and if-else for comparisons like greater than, less than, or multiple logical conditions."
+
+---
+
+## Q6. Why is `break` important in a switch statement?
+
+### Answer:
+
+`break` stops execution after the matching case.
+
+Without `break`, execution continues to the next cases (called fall-through).
+
+---
+
+### Interview Answer (Short)
+
+> "`break` prevents execution from continuing into other cases after a match is found."
+
+---
+
+## Q7. What is the purpose of the `default` case?
+
+### Answer:
+
+The `default` case executes when no case matches.
+
+It works like the `else` block of an `if-else` statement.
+
+---
+
+### Interview Answer (Short)
+
+> "`default` handles unexpected or unsupported values when none of the cases match."
+
+---
+
+## Q8. Where have you used conditional statements in your Playwright framework?
+
+### Answer:
+
+Common examples:
+
+- Browser selection
+- Environment selection
+- Login validation
+- Role-based validation
+- Test execution conditions
+
+Example:
+
+```typescript
+if(browser === "Chrome"){
+
+    // Launch Chrome
+
+}
+```
+
+---
+
+### Interview Answer (Short)
+
+> "I use conditional statements for browser selection, login validation, environment checks, and controlling test execution."
+
+---
+
+## Q9. What are some best practices when writing conditional statements?
+
+### Answer:
+
+- Prefer `===` over `==`
+- Keep conditions simple and readable
+- Avoid deeply nested `if` statements
+- Always include `default` in `switch`
+- Use `switch` only for fixed values
+
+---
+
+### Interview Answer (Short)
+
+> "I keep conditions simple, use strict comparison (`===`), avoid unnecessary nesting, and always include a default case in switch."
+
+---
+
+## Q10. Can a switch statement replace every if-else statement?
+
+### Answer:
+
+No.
+
+`switch` works only with fixed values.
+
+Conditions like:
+
+```typescript
+if(age >= 18)
+```
+
+cannot be written using `switch`.
+
+---
+
+### Interview Answer (Short)
+
+> "No. Switch is suitable only for fixed values. For range-based or logical conditions, if-else is the better choice."
