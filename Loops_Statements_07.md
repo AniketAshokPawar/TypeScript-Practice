@@ -282,3 +282,87 @@ for(let i = 1; i <= 10; i++){
 - Use meaningful loop conditions
 - Prefer `for` loop for fixed iterations
 - Use `break` and `continue` carefully
+
+---
+
+# Loops in TypeScript - VVIP Interview Questions
+
+---
+
+## Q1. What are loops, and why do we use them?
+
+### Interview Answer (Short)
+
+> "Loops execute the same block of code multiple times, helping us avoid duplicate code."
+
+---
+
+## Q2. What is the difference between `for`, `while`, and `do-while`?
+
+### Interview Answer (Short)
+
+> "`for` is used when the number of iterations is known. `while` is used when it is unknown. `do-while` always executes at least once."
+
+---
+
+## Q3. What is the difference between `while` and `do-while`?
+
+### Interview Answer (Short)
+
+> "`while` checks the condition first. `do-while` executes once before checking the condition."
+
+---
+
+## Q4. What is the difference between `break` and `continue`?
+
+### Interview Answer (Short)
+
+> "`break` exits the loop completely, whereas `continue` skips only the current iteration and continues with the next one."
+
+---
+
+## Q5. Why do you prefer `for...of` when iterating arrays?
+
+### Interview Answer (Short)
+
+> "`for...of` directly gives array values, making the code cleaner and easier to read than using array indexes."
+
+---
+
+## Q6. Where have you used loops in your Playwright framework?
+
+### Interview Answer (Short)
+
+> "I have used loops for Data-Driven Testing, reading JSON data, iterating browser lists, validating multiple UI elements, and implementing retry logic."
+
+---
+
+## Q7. Have you used nested loops in automation? Give an example.
+
+### Interview Answer (Short)
+
+> "Yes. For example, when validating rows and columns of a web table or comparing multiple datasets."
+
+---
+
+## Q8. Which loop do you use most in automation projects?
+
+### Interview Answer (Short)
+
+> "Mostly `for` and `for...of` because we frequently iterate through test data, browsers, and UI elements."
+
+---
+
+## Q9. Can every `while` loop be written as a `for` loop?
+
+### Interview Answer (Short)
+
+> "Yes, in many cases. The choice depends on readability. If the number of iterations is known, I prefer `for`; otherwise, I use `while`."
+
+---
+
+## Q10. Give a real Playwright example where `continue` is useful.
+
+### Interview Answer (Short)
+
+> "When running tests on multiple browsers, I can skip a browser that is temporarily unsupported while continuing with the remaining browsers."
