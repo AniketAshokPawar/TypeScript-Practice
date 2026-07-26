@@ -1041,3 +1041,780 @@ console.log(s1.name);
 - `private` → Accessible only inside the same class.
 - Access modifiers help implement data hiding and encapsulation.
 - If no access modifier is specified, TypeScript uses `public` by default.
+
+---
+
+# TypeScript Objects and Classes - Interview VVIP Questions & Answers
+
+Target:
+- 0–2.5 years Automation Tester / SDET
+- TypeScript + Playwright interviews
+- POM framework related questions
+
+Focus:
+- Object
+- Class
+- Constructor
+- this keyword
+- new keyword
+- readonly property
+- optional property
+
+---
+
+# Q1. What is the difference between Object and Class in TypeScript?
+
+## Answer
+
+### Class
+
+- Class is a blueprint/template used to create objects.
+
+- It defines properties and methods.
+
+- It does not store actual values until an object is created.
+
+Example:
+
+```ts
+
+class Employee {
+
+    name:string;
+
+    display(){
+
+        console.log(this.name);
+
+    }
+
+}
+
+Object
+
+Object is an instance of a class.
+
+It contains actual data.
+
+Example:
+
+let emp1 = new Employee();
+
+Here:
+
+Employee → Class
+
+emp1 → Object
+
+Interview Point
+
+Class defines structure.
+
+Object represents actual entity.
+
+---
+
+# Q2. Why do we use constructor in TypeScript classes?
+
+## Answer
+
+Constructor is a special method that:
+
+Executes automatically when object is created.
+
+Initializes class properties.
+
+Assigns initial values.
+
+Example:
+
+class Employee{
+
+    name:string;
+
+    constructor(name:string){
+
+        this.name=name;
+
+    }
+
+}
+
+let emp=new Employee("Aniket");
+
+When:
+
+new Employee("Aniket")
+
+runs, constructor executes automatically.
+
+Interview Point
+
+Constructor reduces repeated initialization code.
+
+Q3. What is the purpose of the this keyword in TypeScript?
+
+Answer
+
+this refers to the current object instance.
+
+Example:
+
+class Employee{
+
+    name:string;
+
+    constructor(name:string){
+
+        this.name=name;
+
+    }
+
+}
+
+Here:
+
+this.name
+
+refers to class property.
+
+And:
+
+name
+
+refers to constructor parameter.
+
+Without this:
+
+name = name;
+
+will not assign class property correctly.
+
+Q4. What happens when we create an object using the new keyword?
+
+Answer
+
+new creates an instance of a class.
+
+Example:
+
+class Browser{
+
+    name:string;
+
+}
+
+let chrome = new Browser();
+
+When new executes:
+
+Memory is allocated for object
+
+Constructor is called
+
+Properties are initialized
+
+Object reference is returned
+
+Q5. Can one class create multiple objects?
+
+Answer
+
+Yes.
+
+One class can create multiple independent objects.
+
+Example:
+
+class Browser{
+
+    constructor(public name:string){}
+
+}
+
+let chrome = new Browser("Chrome");
+
+let firefox = new Browser("Firefox");
+
+Output:
+
+chrome.name → Chrome
+
+firefox.name → Firefox
+
+Each object maintains its own data.
+
+Q6. Explain readonly property in TypeScript.
+
+Answer
+
+readonly property can be assigned only once.
+
+Usually value is assigned during:
+
+declaration
+
+constructor
+
+After that it cannot be modified.
+
+Example:
+
+class Student{
+
+    readonly id:number;
+
+    constructor(id:number){
+
+        this.id=id;
+
+    }
+
+}
+
+let s1=new Student(101);
+
+s1.id=102;
+
+Error:
+
+Cannot assign to 'id' because it is a read-only property.
+
+Real Automation Example
+
+Readonly can be used for:
+
+Employee ID
+
+Test Execution ID
+
+User ID
+
+Account Number
+
+Q7. What is an optional property in TypeScript?
+
+Answer
+
+Optional property means property may or may not exist.
+
+It uses:
+
+?
+
+Example:
+
+class Employee{
+
+    name:string;
+
+    city?:string;
+
+}
+
+Valid:
+
+let emp1 = {
+
+name:"Aniket",
+
+city:"Pune"
+
+}
+
+Also valid:
+
+let emp2 = {
+
+name:"Rahul"
+
+}
+
+because city is optional.
+
+Q8. Difference between readonly property and optional property?
+
+Answer
+
+readonly  optional
+
+Value cannot be changed after initialization  Property may or may not exist
+
+Uses readonly keyword  Uses ? symbol
+
+Used for fixed values  Used for optional information
+
+Example: Employee ID  Example: City
+
+Example:
+
+Readonly:
+
+readonly employeeId:number;
+
+Optional:
+
+city?:string;
+
+Q9. How are classes useful in Playwright automation framework?
+
+Answer
+
+Classes are heavily used in Page Object Model.
+
+Example:
+
+class LoginPage{
+
+    username:string;
+
+    password:string;
+
+    login(){
+
+        console.log("Login");
+
+    }
+
+}
+
+Object:
+
+let loginPage = new LoginPage();
+
+Benefits:
+
+Code reusability
+
+Maintainability
+
+Separation of locators and test logic
+
+Easy maintenance when UI changes
+
+Real framework:
+
+pages/
+
+ |
+
+ |-- LoginPage.ts
+
+ |-- DashboardPage.ts
+
+ |-- BasePage.ts
+
+Each page is represented as a class.
+
+Q10. Convert this object-based approach into class-based approach. Why is class better?
+
+Object:
+
+let employee={
+
+name:"Aniket",
+
+salary:50000,
+
+display(){
+
+console.log(this.name);
+
+}
+
+}
+
+Class:
+
+class Employee{
+
+name:string;
+
+salary:number;
+
+constructor(name:string,salary:number){
+
+this.name=name;
+
+this.salary=salary;
+
+}
+
+display(){
+
+console.log(this.name);
+
+}
+
+}
+
+
+```
+# Static Properties and Static Methods in TypeScript - Interview VVIP Questions & Answers
+
+Target:
+- 0--2.5 Years Automation Tester / SDET
+- TypeScript + Playwright Interviews
+
+Focus:
+- Static Property
+- Static Method
+- Class vs Object access
+- Automation framework usage
+
+---
+
+# Q1. What is a static property in TypeScript?
+
+## Answer
+
+A static property is a property that belongs to the class itself instead of individual objects.
+
+It is shared among all objects of that class.
+
+Example:
+
+```ts
+class Student {
+
+    static schoolName:string = "ABC School";
+
+}
+
+console.log(Student.schoolName);
+```
+
+Here:
+
+```
+schoolName belongs to Student class.
+```
+
+It is not stored separately for every object.
+
+* * * * *
+
+Interview Point
+---------------
+
+Use static properties when a value is common for all objects.
+
+Examples:
+
+-   Company name
+-   Framework name
+-   Environment name
+-   Configuration values
+
+* * * * *
+
+Q2. What is the difference between static property and normal property?
+=======================================================================
+
+Answer
+------
+
+| Normal Property | Static Property |
+| --- | --- |
+| Belongs to object | Belongs to class |
+| Each object has separate copy | Single shared copy |
+| Access using object | Access using class name |
+| Declared without static keyword | Declared using static keyword |
+
+Example:
+
+```
+class Employee {
+
+    name:string;
+    static company:string = "Siemens";
+
+}
+```
+
+Access:
+
+```
+let emp = new Employee();
+
+emp.name;               // Valid
+
+Employee.company;       // Valid
+```
+
+* * * * *
+
+Q3. Can we access static property using object?
+===============================================
+
+Answer
+------
+
+No.
+
+Static members belong to class, not objects.
+
+Example:
+
+```
+class Browser {
+
+    static browserName:string = "Chrome";
+
+}
+
+let b = new Browser();
+
+console.log(b.browserName);
+```
+
+Error:
+
+```
+Property 'browserName' does not exist on type Browser
+```
+
+Correct way:
+
+```
+Browser.browserName;
+```
+
+* * * * *
+
+Q4. What is a static method in TypeScript?
+==========================================
+
+Answer
+------
+
+A static method is a method that belongs to the class instead of an object.
+
+It can be called directly using class name.
+
+Example:
+
+```
+class TestUtility {
+
+    static printMessage(){
+
+        console.log("Running Test");
+
+    }
+
+}
+
+TestUtility.printMessage();
+```
+
+No object creation is required.
+
+* * * * *
+
+Q5. Why do we use static methods in automation frameworks?
+==========================================================
+
+Answer
+------
+
+Static methods are commonly used for utility functions that do not depend on object data.
+
+Examples:
+
+-   Screenshot utility
+-   Date formatter
+-   Test data reader
+-   Random ID generator
+-   Configuration loader
+
+Example:
+
+```
+class ScreenshotUtil {
+
+    static capture(){
+
+        console.log("Taking screenshot");
+
+    }
+
+}
+
+ScreenshotUtil.capture();
+```
+
+* * * * *
+
+Q6. Can a static method access non-static properties?
+=====================================================
+
+Answer
+------
+
+No.
+
+Because static methods belong to the class and do not have access to object-specific data.
+
+Example:
+
+```
+class Employee {
+
+    name:string="Aniket";
+
+    static display(){
+
+        console.log(this.name);
+
+    }
+
+}
+```
+
+This gives error.
+
+Reason:
+
+```
+Static method does not know which object name should be accessed.
+```
+
+* * * * *
+
+Q7. Can a static method access static properties?
+=================================================
+
+Answer
+------
+
+Yes.
+
+Example:
+
+```
+class Config {
+
+    static environment:string="QA";
+
+    static display(){
+
+        console.log(Config.environment);
+
+    }
+
+}
+
+Config.display();
+```
+
+Output:
+
+```
+QA
+```
+
+* * * * *
+
+Q8. What is the difference between static method and normal method?
+===================================================================
+
+Answer
+------
+
+| Normal Method | Static Method |
+| --- | --- |
+| Belongs to object | Belongs to class |
+| Called using object | Called using class name |
+| Can access instance properties | Cannot access instance properties directly |
+| Requires object creation | No object required |
+
+Example:
+
+Normal:
+
+```
+employee.display();
+```
+
+Static:
+
+```
+Utility.generateReport();
+```
+
+* * * * *
+
+Q9. Give a real Playwright framework example where static is used.
+==================================================================
+
+Answer
+------
+
+Static is commonly used in utility classes.
+
+Example:
+
+```
+class TestData {
+
+    static url:string="https://application.com";
+
+    static getURL(){
+
+        return TestData.url;
+
+    }
+
+}
+```
+
+Usage:
+
+```
+page.goto(TestData.getURL());
+```
+
+Benefits:
+
+-   No object creation
+-   Common data accessible everywhere
+-   Cleaner framework design
+
+* * * * *
+
+Q10. Why don't we make every property and method static?
+========================================================
+
+Answer
+------
+
+Because static members are shared by all objects.
+
+If data is different for every object, it should not be static.
+
+Example:
+
+Wrong:
+
+```
+class Employee{
+
+    static name:string;
+
+}
+```
+
+because every employee has a different name.
+
+Correct:
+
+```
+class Employee{
+
+    name:string;
+
+}
+```
+
+Static should be used only for common/shared data.
