@@ -437,3 +437,537 @@ Aniket Pawar
 - `split()` converts a string into an array.
 - `trim()`, `trimStart()`, and `trimEnd()` are useful when handling user input.
 - String methods are frequently used in Playwright for text validation and assertions.
+
+---
+
+```
+# String Methods in TypeScript - Interview VVIP Questions & Answers
+
+These are commonly asked string-related interview questions for
+0--2.5 years Automation Tester / SDET candidates.
+
+Focus areas:
+- String manipulation
+- Test data handling
+- API response validation
+- Playwright automation scenarios
+
+---
+* * * * *
+
+# Q1. What is the difference between substring() and slice()?
+
+## Answer
+
+Both are used to extract parts of a string.
+
+### substring()
+
+- Does not support negative indexes
+- If start index is greater than end index, it swaps them
+
+Example:
+
+```ts
+let text = "Automation";
+
+console.log(text.substring(5,2));
+```
+
+Output:
+
+```
+oma
+```
+
+Because:
+
+```
+substring(2,5)
+```
+
+is internally considered.
+
+* * * * *
+
+### slice()
+
+-   Supports negative indexes
+-   Does not swap indexes
+
+Example:
+
+```
+let text = "Automation";
+
+console.log(text.slice(-3));
+```
+
+Output:
+
+```
+ion
+```
+
+* * * * *
+
+Q2. What happens when indexOf() does not find a value?
+======================================================
+
+Answer
+------
+
+`indexOf()` returns `-1`.
+
+Example:
+
+```
+let browser = "Chrome";
+
+console.log(browser.indexOf("Firefox"));
+```
+
+Output:
+
+```
+-1
+```
+
+* * * * *
+
+Q3. Difference between includes() and indexOf()
+===============================================
+
+Answer
+------
+
+Both check whether a value exists.
+
+### includes()
+
+Returns boolean:
+
+```
+true / false
+```
+
+Example:
+
+```
+let text = "Playwright";
+
+console.log(text.includes("wright"));
+```
+
+Output:
+
+```
+true
+```
+
+* * * * *
+
+### indexOf()
+
+Returns position:
+
+```
+let text = "Playwright";
+
+console.log(text.indexOf("wright"));
+```
+
+Output:
+
+```
+5
+```
+
+* * * * *
+
+Q4. Why are strings called immutable in JavaScript/TypeScript?
+==============================================================
+
+Answer
+------
+
+Strings cannot be modified directly.
+
+Any string operation creates a new string.
+
+Example:
+
+```
+let name = "aniket";
+
+name.toUpperCase();
+
+console.log(name);
+```
+
+Output:
+
+```
+aniket
+```
+
+Correct way:
+
+```
+name = name.toUpperCase();
+
+console.log(name);
+```
+
+Output:
+
+```
+ANIKET
+```
+
+* * * * *
+
+Q5. How do you reverse a string?
+================================
+
+Answer
+------
+
+Using split(), reverse(), and join().
+
+Example:
+
+```
+let text = "Playwright";
+
+let reverse = text.split("")
+                  .reverse()
+                  .join("");
+
+console.log(reverse);
+```
+
+Output:
+
+```
+thgirwylP
+```
+
+* * * * *
+
+Q6. How do you check whether a string is palindrome?
+====================================================
+
+Answer
+------
+
+Compare original string with reversed string.
+
+Example:
+
+```
+let text = "madam";
+
+let reverse = text.split("")
+                  .reverse()
+                  .join("");
+
+if(text === reverse){
+
+    console.log("Palindrome");
+
+}
+else{
+
+    console.log("Not Palindrome");
+
+}
+```
+
+Output:
+
+```
+Palindrome
+```
+
+* * * * *
+
+Q7. How do you remove duplicate characters from a string?
+=========================================================
+
+Answer
+------
+
+Convert string into array and use Set.
+
+Example:
+
+```
+let text = "automation";
+
+let result = [...new Set(text)];
+
+console.log(result.join(""));
+```
+
+Output:
+
+```
+automn
+```
+
+* * * * *
+
+Q8. How do you count occurrence of a character in a string?
+===========================================================
+
+Answer
+------
+
+Example:
+
+```
+let text = "automation";
+
+let count = 0;
+
+for(let char of text){
+
+    if(char === "o"){
+
+        count++;
+
+    }
+}
+
+console.log(count);
+```
+
+Output:
+
+```
+2
+```
+
+* * * * *
+
+Q9. How do you extract username from email?
+===========================================
+
+Answer
+------
+
+Using indexOf() and substring().
+
+Example:
+
+```
+let email = "aniket@gmail.com";
+
+let username = email.substring(
+    0,
+    email.indexOf("@")
+);
+
+console.log(username);
+```
+
+Output:
+
+```
+aniket
+```
+
+* * * * *
+
+Q10. How do you validate API response message contains expected text?
+=====================================================================
+
+Answer
+------
+
+Using includes().
+
+Example:
+
+```
+let response = "User created successfully";
+
+if(response.includes("successfully")){
+
+    console.log("Validation Passed");
+
+}
+```
+
+Output:
+
+```
+Validation Passed
+```
+
+* * * * *
+
+Q11. Difference between replace() and replaceAll()
+==================================================
+
+Answer
+------
+
+### replace()
+
+Replaces only first occurrence.
+
+Example:
+
+```
+let text = "test test";
+
+console.log(text.replace("test","pass"));
+```
+
+Output:
+
+```
+pass test
+```
+
+* * * * *
+
+### replaceAll()
+
+Replaces all occurrences.
+
+Example:
+
+```
+let text = "test test";
+
+console.log(text.replaceAll("test","pass"));
+```
+
+Output:
+
+```
+pass pass
+```
+
+* * * * *
+
+Q12. How do you convert a string into an array?
+===============================================
+
+Answer
+------
+
+Using split().
+
+Example:
+
+```
+let browsers = "Chrome,Firefox,Edge";
+
+let arr = browsers.split(",");
+
+console.log(arr);
+```
+
+Output:
+
+```
+[
+"Chrome",
+"Firefox",
+"Edge"
+]
+```
+
+* * * * *
+
+Q13. How do you remove spaces from user input?
+==============================================
+
+Answer
+------
+
+Using trim().
+
+Example:
+
+```
+let username = "   admin   ";
+
+console.log(username.trim());
+```
+
+Output:
+
+```
+admin
+```
+
+* * * * *
+
+Q14. Difference between trim(), trimStart(), and trimEnd()
+==========================================================
+
+Answer
+------
+
+| Method | Purpose |
+| --- | --- |
+| trim() | Removes spaces from both sides |
+| trimStart() | Removes spaces from beginning |
+| trimEnd() | Removes spaces from end |
+
+Example:
+
+```
+let text = "  Aniket  ";
+
+console.log(text.trim());
+```
+
+Output:
+
+```
+Aniket
+```
+
+* * * * *
+
+Q15. Real Playwright Scenario
+=============================
+
+Question
+--------
+
+How will you validate that a button text contains expected value?
+
+Example:
+
+```
+let actualText = "Submit Order";
+```
+
+Expected:
+
+```
+Submit
+```
+
+Answer
+------
+
+```
+if(actualText.includes("Submit")){
+
+    console.log("Text validation passed");
+
+}
+else{
+
+    console.log("Text validation failed");
+
+}
+```
