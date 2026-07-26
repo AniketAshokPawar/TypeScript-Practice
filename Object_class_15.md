@@ -1818,3 +1818,238 @@ class Employee{
 ```
 
 Static should be used only for common/shared data.
+
+```
+```
+# Method Overloading in TypeScript - Interview VVIP Questions & Answers
+
+Target:
+- 0--2.5 years Automation Tester / SDET
+- TypeScript + Playwright interviews
+
+Focus:
+- Method Overloading
+- Function signatures
+- Implementation method
+- Optional parameters
+- Compile-time behavior
+
+---
+
+# Q1. What is method overloading in TypeScript?
+
+## Answer
+
+Method overloading allows a class method to have multiple definitions with different parameter combinations.
+
+It allows the same method name to perform different operations based on the number or type of parameters passed.
+
+Example:
+
+```ts
+class Calculator {
+
+    add(a:number,b:number):number;
+
+    add(a:number,b:number,c:number):number;
+
+    add(a:number,b:number,c?:number):number{
+
+        if(c !== undefined){
+
+            return a+b+c;
+        }
+
+        return a+b;
+    }
+}
+```
+
+Here:
+
+```
+add(10,20)
+```
+
+and
+
+```
+add(10,20,30)
+```
+
+both are valid calls.
+
+* * * * *
+
+Q2. How does TypeScript implement method overloading?
+=====================================================
+
+Answer
+------
+
+TypeScript method overloading works using:
+
+1.  Multiple overload signatures
+2.  One implementation method
+
+Example:
+
+```
+class Login {
+
+    login(username:string):string;
+
+    login(username:string,password:string):string;
+
+    login(username:string,password?:string):string{
+
+        if(password){
+
+            return "Login with password";
+        }
+
+        return "Login with username";
+    }
+}
+```
+
+Overload signatures:
+
+```
+login(username:string):string;
+
+login(username:string,password:string):string;
+```
+
+Only define valid ways to call the method.
+
+Implementation:
+
+```
+login(username:string,password?:string)
+```
+
+contains actual logic.
+
+* * * * *
+
+Q3. Why can we have only one implementation method in method overloading?
+=========================================================================
+
+Answer
+------
+
+Because TypeScript removes overload signatures during compilation.
+
+At runtime, JavaScript supports only one actual function implementation.
+
+Example:
+
+```
+add(a:number,b:number):number;
+
+add(a:number,b:number,c:number):number;
+```
+
+These are only compile-time definitions.
+
+Actual JavaScript contains only:
+
+```
+add(a,b,c){
+
+}
+```
+
+Therefore, TypeScript allows only one implementation.
+
+* * * * *
+
+Q4. Can method overloading improve automation framework design?
+===============================================================
+
+Answer
+------
+
+Yes.
+
+Method overloading helps when the same action can be performed in multiple ways.
+
+Example in automation:
+
+```
+class LoginPage {
+
+    login(username:string):void;
+
+    login(username:string,password:string):void;
+
+    login(username:string,password?:string){
+
+        if(password){
+
+            console.log("Login with username and password");
+
+        }
+        else{
+
+            console.log("Login with username only");
+        }
+
+    }
+
+}
+```
+
+Usage:
+
+```
+loginPage.login("admin");
+
+loginPage.login("admin","admin123");
+```
+
+Benefits:
+
+-   Improves readability
+-   Provides better IntelliSense
+-   Supports multiple use cases
+-   Reduces duplicate methods
+
+* * * * *
+
+Q5. What happens if we call an overloaded method with invalid parameters?
+=========================================================================
+
+Answer
+------
+
+TypeScript gives a compile-time error.
+
+Example:
+
+```
+class Calculator{
+
+    add(a:number,b:number):number;
+
+    add(a:number,b:number,c:number):number;
+
+    add(a:number,b:number,c?:number){
+
+        return a+b;
+    }
+}
+
+let calc = new Calculator();
+
+calc.add(10);
+```
+
+Error:
+
+```
+Expected 2-3 arguments, but got 1.
+```
+
+Because no overload signature accepts one parameter.
