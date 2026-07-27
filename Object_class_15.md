@@ -2053,3 +2053,372 @@ Expected 2-3 arguments, but got 1.
 ```
 
 Because no overload signature accepts one parameter.
+
+# TypeScript Interview VVIP Questions & Answers
+## Topic: Inheritance, Method Overriding & `super`
+
+**Target:** 0–2.5 Years Automation Tester / SDET / Playwright
+
+---
+
+# Q1. What is inheritance in TypeScript?
+
+## Answer
+
+Inheritance allows a child class to reuse the properties and methods of a parent class.
+
+It is achieved using the `extends` keyword.
+
+### Example
+
+```ts
+class BasePage{
+
+    click(){
+
+        console.log("Click");
+
+    }
+
+}
+
+class LoginPage extends BasePage{
+
+}
+
+let page = new LoginPage();
+
+page.click();
+```
+
+### Interview Point
+
+- Promotes code reusability.
+- Reduces duplicate code.
+- Used extensively in Page Object Model (POM).
+
+---
+
+# Q2. Why do we use the `super()` keyword?
+
+## Answer
+
+`super()` is used inside a child class constructor to call the parent class constructor.
+
+Without calling `super()`, inherited properties cannot be initialized.
+
+### Example
+
+```ts
+class Person{
+
+    constructor(public name:string){}
+
+}
+
+class Student extends Person{
+
+    constructor(name:string){
+
+        super(name);
+
+    }
+
+}
+```
+
+### Interview Point
+
+`super()` **must be the first statement** inside a child constructor.
+
+---
+
+# Q3. What is the purpose of `super.methodName()`?
+
+## Answer
+
+`super.methodName()` calls the parent class version of an overridden method.
+
+### Example
+
+```ts
+class BasePage{
+
+    navigate(){
+
+        console.log("Opening Application");
+
+    }
+
+}
+
+class LoginPage extends BasePage{
+
+    navigate(){
+
+        super.navigate();
+
+        console.log("Opening Login Page");
+
+    }
+
+}
+```
+
+Output
+
+```text
+Opening Application
+Opening Login Page
+```
+
+### Interview Point
+
+Use `super.method()` when you want to keep the parent's behavior and then add extra child-specific logic.
+
+---
+
+# Q4. What is method overriding?
+
+## Answer
+
+Method overriding occurs when a child class provides its own implementation of a method already defined in the parent class.
+
+### Example
+
+```ts
+class Browser{
+
+    launch(){
+
+        console.log("Launching Browser");
+
+    }
+
+}
+
+class Chrome extends Browser{
+
+    launch(){
+
+        console.log("Launching Chrome Browser");
+
+    }
+
+}
+```
+
+### Interview Point
+
+- Parent and child methods have the same name.
+- Child implementation replaces the parent implementation.
+
+---
+
+# Q5. What is runtime polymorphism?
+
+## Answer
+
+Runtime polymorphism occurs when a parent reference stores a child object, and the overridden child method executes at runtime.
+
+### Example
+
+```ts
+class Person{
+
+    displayRole(){
+
+        console.log("I am Person");
+
+    }
+
+}
+
+class Student extends Person{
+
+    displayRole(){
+
+        console.log("I am Student");
+
+    }
+
+}
+
+let p: Person = new Student();
+
+p.displayRole();
+```
+
+Output
+
+```text
+I am Student
+```
+
+### Why?
+
+```text
+Reference Type = Person
+Object Type = Student
+```
+
+The object type decides which overridden method executes.
+
+### Interview Point
+
+This is also called **Dynamic Method Dispatch** or **Runtime Polymorphism**.
+
+---
+
+# Q6. Why can't a parent reference access child-specific methods?
+
+## Answer
+
+A parent reference can access only the members declared in the parent class.
+
+### Example
+
+```ts
+class Person{
+
+    display(){}
+
+}
+
+class Student extends Person{
+
+    displayMarks(){}
+
+}
+
+let p: Person = new Student();
+
+p.display();        // Valid
+p.displayMarks();   // Error
+```
+
+### Reason
+
+The compiler checks the **reference type**, not the actual object.
+
+### Interview Point
+
+Parent reference → Parent members only.
+
+---
+
+# Q7. Difference between Inheritance and Method Overriding?
+
+| Inheritance | Method Overriding |
+|-------------|-------------------|
+| Acquires properties and methods from parent class | Child changes parent method implementation |
+| Uses `extends` | Same method name in parent and child |
+| Promotes code reuse | Promotes runtime polymorphism |
+
+---
+
+# Q8. How is inheritance used in Playwright Framework?
+
+## Answer
+
+Inheritance is widely used in Page Object Model.
+
+### Example
+
+```text
+BasePage
+   │
+   ├── LoginPage
+   ├── DashboardPage
+   └── SettingsPage
+```
+
+`BasePage` contains common methods:
+
+```ts
+click()
+fill()
+waitForElement()
+```
+
+Every page inherits these methods instead of rewriting them.
+
+### Benefits
+
+- Code reuse
+- Easy maintenance
+- Less duplication
+- Cleaner framework
+
+---
+
+# Q9. Real-time automation example of method overriding?
+
+## Answer
+
+A common example is overriding navigation or setup methods in page classes.
+
+```ts
+class BasePage{
+
+    navigate(){
+
+        console.log("Opening Application");
+
+    }
+
+}
+
+class LoginPage extends BasePage{
+
+    navigate(){
+
+        super.navigate();
+
+        console.log("Navigating to Login Page");
+
+    }
+
+}
+```
+
+Here:
+
+- BasePage performs common navigation.
+- LoginPage adds page-specific behavior.
+
+This is a common design pattern in Playwright frameworks.
+
+---
+
+# Q10. Explain this statement.
+
+```ts
+let page: BasePage = new LoginPage();
+```
+
+## Answer
+
+This demonstrates runtime polymorphism.
+
+- **Reference Type:** `BasePage`
+- **Object Type:** `LoginPage`
+
+The reference can access only methods declared in `BasePage`, but if those methods are overridden, the `LoginPage` implementation executes.
+
+### Interview One-Liner
+
+> **Reference type decides what can be accessed. Object type decides which overridden method executes.**
+
+---
+
+# Frequently Asked One-Liners
+
+- Inheritance uses the `extends` keyword.
+- `super()` calls the parent constructor.
+- `super.method()` calls the parent method.
+- Method overriding provides a new implementation in the child class.
+- Runtime polymorphism occurs when a parent reference points to a child object.
+- Parent references can access only parent members.
+- Overridden methods execute based on the actual object at runtime.
+- In Playwright, `LoginPage extends BasePage` is the most common inheritance example.
