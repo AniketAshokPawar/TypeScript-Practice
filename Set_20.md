@@ -423,3 +423,116 @@ Expected answer:
 ```ts
 let uniqueArray = [...new Set(array)];
 ```
+# TypeScript Set - VVIP Interview Questions
+
+## Q1. What is a Set in TypeScript?
+
+### Answer
+
+A **Set** is a collection that stores **only unique values**. If a duplicate value is added, it is automatically ignored.
+
+### Example
+
+```ts
+let browsers = new Set([
+    "Chrome",
+    "Firefox",
+    "Chrome"
+]);
+
+console.log(browsers);
+```
+
+**Output**
+
+```text
+Set(2) { 'Chrome', 'Firefox' }
+```
+
+---
+
+## Q2. What is the difference between Array and Set?
+
+### Answer
+
+| Array | Set |
+|--------|-----|
+| Allows duplicate values | Stores only unique values |
+| Uses `length` | Uses `size` |
+| Supports index-based access | Does not support index-based access |
+| Best for ordered collections | Best for unique collections |
+
+---
+
+## Q3. How do you remove duplicate values from an array?
+
+### Answer
+
+This is the **most frequently asked Set interview question**.
+
+```ts
+let browsers = [
+    "Chrome",
+    "Firefox",
+    "Chrome",
+    "Edge"
+];
+
+let uniqueBrowsers = [...new Set(browsers)];
+
+console.log(uniqueBrowsers);
+```
+
+**Output**
+
+```text
+["Chrome", "Firefox", "Edge"]
+```
+
+---
+
+## Q4. Where have you used Set in automation testing?
+
+### Answer
+
+Common real-world automation use cases include:
+
+- Removing duplicate browser names
+- Removing duplicate test IDs
+- Validating unique dropdown values
+- Removing duplicate URLs
+- Comparing unique values from web tables
+
+### Example
+
+```ts
+let uniqueCountries = [...new Set(countryList)];
+```
+
+---
+
+## Q5. What are the commonly used Set methods?
+
+### Answer
+
+| Method | Purpose |
+|---------|---------|
+| `add()` | Adds a value to the Set |
+| `has()` | Checks whether a value exists |
+| `delete()` | Removes a value |
+| `clear()` | Removes all values |
+| `size` | Returns the number of unique values |
+
+---
+
+# Interview Priority
+
+⭐⭐⭐⭐⭐ **Very High**
+
+The most commonly asked Set interview questions are:
+
+1. What is a Set?
+2. Difference between Array and Set.
+3. How do you remove duplicate values from an array? ⭐⭐⭐⭐⭐
+4. Where have you used Set in automation testing?
+5. Explain the commonly used Set methods (`add()`, `has()`, `delete()`, `clear()`, `size`).
