@@ -1,21 +1,10 @@
 # Async / Await in TypeScript
 
-Async/Await is used to handle asynchronous operations in a simple and readable way.
+## What is Synchronous Execution?
 
-Common asynchronous operations:
-- API Calls
-- Database Queries
-- File Reading
-- Browser Actions (Playwright)
-- Waiting for Elements
+By default, JavaScript and TypeScript execute code **line by line**. The next statement runs only after the current one finishes.
 
----
-
-# Synchronous Execution
-
-Code executes line by line.
-
-Example:
+### Example
 
 ```ts
 console.log("A");
@@ -23,7 +12,7 @@ console.log("B");
 console.log("C");
 ```
 
-Output:
+**Output**
 
 ```text
 A
@@ -33,23 +22,31 @@ C
 
 ---
 
-# Asynchronous Execution
+## What is Asynchronous Execution?
 
-Some operations take time to complete.
+Some operations take time to complete, such as:
 
-Example:
+* API calls
+* Database queries
+* Reading files
+* Timers (`setTimeout`)
+* Playwright browser actions (`goto`, `click`, `fill`, etc.)
+
+Instead of blocking the program, JavaScript starts these operations and continues executing the next lines.
+
+### Example
 
 ```ts
 console.log("Step 1");
 
 setTimeout(() => {
     console.log("Step 2");
-}, 3000);
+}, 2000);
 
 console.log("Step 3");
 ```
 
-Output:
+**Output**
 
 ```text
 Step 1
@@ -57,26 +54,102 @@ Step 3
 Step 2
 ```
 
-Explanation:
-- JavaScript does not wait for `setTimeout()`
-- It continues executing the next line
+---
+
+# Is JavaScript/TypeScript Synchronous or Asynchronous?
+
+This is one of the most common interview questions.
+
+**Answer:**
+
+JavaScript and TypeScript are **synchronous languages by default**.
+
+However, they can execute **asynchronous operations** using APIs such as:
+
+* `setTimeout()`
+* `fetch()`
+* Promises
+* Playwright methods (`goto()`, `click()`, `fill()`, etc.)
+
+So:
+
+```text
+Language
+↓
+
+Synchronous by default
+
+↓
+
+Asynchronous only when async operations are used
+```
+
+---
+
+# Why Do We Need async / await?
+
+Asynchronous operations start in the background.
+
+Without waiting, the next statement may execute before the previous operation finishes.
+
+Example (Playwright)
+
+```ts
+page.goto("https://example.com");
+page.click("#login");
+```
+
+Problem:
+
+```text
+goto() starts loading the page
+
+↓
+
+click() executes immediately
+
+↓
+
+Element may not exist yet
+
+↓
+
+Test may fail
+```
+
+Correct Way
+
+```ts
+await page.goto("https://example.com");
+await page.click("#login");
+```
+
+Execution:
+
+```text
+Open page
+
+↓
+
+Wait until page loads
+
+↓
+
+Click Login
+```
 
 ---
 
 # What is async?
 
-The `async` keyword is used before a function.
+`async` marks a function as asynchronous.
 
-It tells TypeScript:
+It allows the use of `await` inside the function.
 
-```text
-This function may contain asynchronous operations.
-```
-
-## Syntax
+### Syntax
 
 ```ts
-async function functionName(){
+async function greet(){
 
 }
 ```
@@ -84,119 +157,45 @@ async function functionName(){
 or
 
 ```ts
-let functionName = async () => {
+const greet = async () => {
 
-}
-```
-
----
-
-# Example
-
-```ts
-async function greet(){
-
-    console.log("Hello");
-}
-
-greet();
-```
-
-Output:
-
-```text
-Hello
+};
 ```
 
 ---
 
 # Important Rule
 
-An async function always returns a Promise.
+An **async function always returns a Promise**, even if you return a normal value.
 
-Example:
+Example
 
 ```ts
-async function greet(){
+async function getBrowser(){
 
-    return "Hello";
+    return "Chrome";
 }
 ```
 
 Actually returns:
 
 ```text
-Promise { "Hello" }
+Promise<"Chrome">
 ```
 
 ---
 
 # What is await?
 
-The `await` keyword tells JavaScript:
+`await` pauses execution until a Promise is completed.
 
-```text
-Wait until the asynchronous operation finishes.
-```
-
----
-
-# Syntax
+### Syntax
 
 ```ts
-await someAsyncOperation();
+let result = await someAsyncFunction();
 ```
 
----
-
-# Rule
-
-`await` can only be used inside an async function.
-
-❌ Invalid
-
-```ts
-await getUser();
-```
-
-✅ Valid
-
-```ts
-async function main(){
-
-    await getUser();
-}
-```
-
----
-
-# Example
-
-```ts
-async function getUser(){
-
-    return "Admin";
-}
-
-async function main(){
-
-    let user = await getUser();
-
-    console.log(user);
-}
-
-main();
-```
-
-Output:
-
-```text
-Admin
-```
-
----
-
-# Returning a Value
+Example
 
 ```ts
 async function getBrowser(){
@@ -214,7 +213,7 @@ async function main(){
 main();
 ```
 
-Output:
+**Output**
 
 ```text
 Chrome
@@ -222,43 +221,37 @@ Chrome
 
 ---
 
-# Returning Numbers
+# await Can Only Be Used Inside async
+
+❌ Invalid
 
 ```ts
-async function add(num1:number, num2:number){
-
-    return num1 + num2;
-}
-
-async function main(){
-
-    let result = await add(10,20);
-
-    console.log(result);
-}
-
-main();
+await getBrowser();
 ```
 
-Output:
+✅ Valid
 
-```text
-30
+```ts
+async function main(){
+
+    await getBrowser();
+}
 ```
 
 ---
 
-# async + await + try-catch
+# async + await + try...catch
 
-Used to handle errors in asynchronous code.
+Errors from asynchronous operations should be handled using `try...catch`.
 
-Example:
+Example
 
 ```ts
 async function login(username:string){
 
-    if(username === ""){
-        throw new Error("Username Required");
+    if(username===""){
+
+        throw new Error("Username cannot be empty");
     }
 
     return "Login Successful";
@@ -272,6 +265,7 @@ async function main(){
 
         console.log(result);
     }
+
     catch(error){
 
         console.log(error);
@@ -281,10 +275,35 @@ async function main(){
 main();
 ```
 
-Output:
+---
+
+# Simulating Delay
+
+```ts
+async function test(){
+
+    console.log("Start");
+
+    await new Promise(resolve=>{
+
+        setTimeout(resolve,2000);
+
+    });
+
+    console.log("End");
+}
+
+test();
+```
+
+**Output**
 
 ```text
-Error: Username Required
+Start
+
+(wait 2 seconds)
+
+End
 ```
 
 ---
@@ -292,176 +311,174 @@ Error: Username Required
 # Playwright Example
 
 ```ts
-await page.goto("https://google.com");
+await page.goto("https://example.com");
 
 await page.fill("#username","admin");
 
-await page.click("#login");
-```
-
-Execution:
-
-```text
-Open page
-Wait for page load
-
-Fill username
-Wait for completion
-
-Click login
-Wait for completion
-```
-
----
-
-# Why Use await in Playwright?
-
-Without await:
-
-```ts
-page.goto("https://google.com");
-
-page.click("#login");
-```
-
-Problem:
-
-```text
-Page may still be loading
-
-Click executes too early
-
-Test may fail
-```
-
----
-
-# Correct Way
-
-```ts
-await page.goto("https://google.com");
+await page.fill("#password","admin123");
 
 await page.click("#login");
 ```
 
-Execution:
+Execution Flow
 
 ```text
-Open page
+Open Page
 
-Wait for page load
+↓
 
-Click login
+Wait for page to load
+
+↓
+
+Fill Username
+
+↓
+
+Wait
+
+↓
+
+Fill Password
+
+↓
+
+Wait
+
+↓
+
+Click Login
+
+↓
+
+Wait
 ```
 
 ---
 
-# Multiple await Example
+# When Should We Use await?
+
+Use `await` only with asynchronous operations.
+
+✅ Correct
 
 ```ts
-async function test(){
+await page.goto(...);
 
-    console.log("Step 1");
+await page.click(...);
 
-    await new Promise(resolve => {
+await fetch(...);
 
-        setTimeout(resolve, 2000);
-    });
+await getBrowser();
 
-    console.log("Step 2");
-}
-
-test();
+await new Promise(...);
 ```
 
-Output:
+❌ Unnecessary
+
+```ts
+await console.log("Hello");
+
+await Math.max(10,20);
+
+await "Chrome";
+
+await 10+20;
+```
+
+These are synchronous operations and do not return Promises.
+
+---
+
+# Quick Memory Trick
 
 ```text
-Step 1
+JavaScript / TypeScript
 
-(wait 2 seconds)
+↓
 
-Step 2
+Synchronous by default
+
+↓
+
+Async operation starts
+
+↓
+
+Use async + await
+
+↓
+
+Execution becomes sequential again
 ```
 
 ---
 
 # Interview Questions
 
-## What is async?
+### Is JavaScript synchronous or asynchronous?
 
-`async` marks a function as asynchronous and allows the use of `await` inside it.
-
----
-
-## What is await?
-
-`await` pauses execution until a Promise is completed.
+JavaScript is synchronous by default but supports asynchronous operations using Promises, async/await, timers, and browser APIs.
 
 ---
 
-## Can await be used outside an async function?
+### Why do we use async?
+
+To declare that a function performs asynchronous operations and to allow the use of `await`.
+
+---
+
+### Why do we use await?
+
+To pause execution until a Promise is completed.
+
+---
+
+### Can await be used outside an async function?
 
 No.
 
-Invalid:
-
-```ts
-await getUser();
-```
-
-Valid:
-
-```ts
-async function main(){
-
-    await getUser();
-}
-```
-
 ---
 
-## What does an async function return?
+### What does an async function return?
 
 An async function always returns a Promise.
 
 ---
 
-## Why is await used in Playwright?
+### Why is await important in Playwright?
 
-To ensure browser actions complete before moving to the next step.
+Without `await`, Playwright actions may execute before previous actions complete, causing flaky or failed tests.
 
-Example:
+---
 
-```ts
-await page.goto();
-await page.click();
-await page.fill();
-```
+### Can we write `await console.log()`?
+
+Yes, but it has no benefit because `console.log()` is synchronous and does not return a Promise.
 
 ---
 
 # Summary
 
-| Keyword | Purpose |
-|----------|----------|
-| async | Marks a function as asynchronous |
-| await | Waits for async operation to complete |
+| Keyword       | Purpose                                            |
+| ------------- | -------------------------------------------------- |
+| `async`       | Marks a function as asynchronous                   |
+| `await`       | Waits until a Promise completes                    |
+| `Promise`     | Represents the result of an asynchronous operation |
+| `try...catch` | Handles errors from asynchronous code              |
 
 ---
 
-# Important Interview Points
+# One-Line Revision
 
 ```text
-async function always returns a Promise
+JavaScript/TypeScript is synchronous by default.
 
-await can only be used inside async functions
+Only asynchronous operations (API calls, timers, Playwright actions, Promises, etc.) require async/await.
 
-await waits for completion before moving to next line
+async marks a function as asynchronous.
 
-Playwright heavily uses async/await
+await waits for a Promise to finish before executing the next statement.
 
-Without await, actions may execute too early
-
-async/await makes code easier to read
+Playwright uses async/await to execute browser actions sequentially and reliably.
 ```
