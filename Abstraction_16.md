@@ -873,3 +873,388 @@ Interface
 
 Follow the contract
 ```
+
+# TypeScript Interface - VVIP Interview Questions & Answers
+
+Target:
+
+* 0–2.5 Years Automation Tester / SDET
+* TypeScript + Playwright Interviews
+
+Focus:
+
+* Interface
+* implements
+* extends
+* Interface vs Abstract Class
+* Multiple Interfaces
+* Playwright Usage
+
+---
+
+# Q1. What is an Interface in TypeScript?
+
+## Answer
+
+An interface is a blueprint (contract) that defines what properties and methods a class must have.
+
+It specifies **what should exist**, but not **how it should be implemented**.
+
+Example:
+
+```ts
+interface Employee{
+
+    name: string;
+
+    displayDetails(): void;
+
+}
+```
+
+Any class implementing this interface must provide both:
+
+* `name`
+* `displayDetails()`
+
+### Interview Point
+
+* Interface defines a contract.
+* It improves consistency and type safety.
+
+---
+
+# Q2. What is the difference between `extends` and `implements`?
+
+## Answer
+
+### `extends`
+
+Used for inheritance.
+
+A child class inherits properties and methods from a parent class.
+
+Example:
+
+```ts
+class Student extends Person{
+
+}
+```
+
+---
+
+### `implements`
+
+Used when a class follows an interface.
+
+The class must implement all members declared in the interface.
+
+Example:
+
+```ts
+class QAEngineer implements Employee{
+
+}
+```
+
+### Interview Point
+
+* `extends` → Reuse code.
+* `implements` → Follow a contract.
+
+---
+
+# Q3. What happens if a class does not implement all members of an interface?
+
+## Answer
+
+TypeScript gives a compile-time error.
+
+Example:
+
+```ts
+interface Employee{
+
+    displayDetails(): void;
+
+}
+
+class QAEngineer implements Employee{
+
+}
+```
+
+Error:
+
+```text
+Class 'QAEngineer' incorrectly implements interface 'Employee'.
+```
+
+### Interview Point
+
+A class must implement every property and method declared in the interface.
+
+---
+
+# Q4. Can a class implement multiple interfaces?
+
+## Answer
+
+Yes.
+
+A class can implement multiple interfaces.
+
+Example:
+
+```ts
+interface Login{
+
+    login(): void;
+
+}
+
+interface Logout{
+
+    logout(): void;
+
+}
+
+class User implements Login, Logout{
+
+    login(){
+
+        console.log("Login");
+
+    }
+
+    logout(){
+
+        console.log("Logout");
+
+    }
+
+}
+```
+
+### Interview Point
+
+Interfaces support multiple inheritance of contracts.
+
+---
+
+# Q5. Difference between Interface and Abstract Class?
+
+## Answer
+
+| Interface                              | Abstract Class                               |
+| -------------------------------------- | -------------------------------------------- |
+| Uses `interface` keyword               | Uses `abstract class`                        |
+| Uses `implements`                      | Uses `extends`                               |
+| Defines only a contract                | Can provide partial implementation           |
+| No constructor                         | Can have constructor                         |
+| No object state                        | Can maintain object state                    |
+| Multiple interfaces can be implemented | Only one abstract/base class can be extended |
+
+### Interview Point
+
+Use:
+
+* **Interface** → When you only need to define rules.
+* **Abstract Class** → When you want common code + compulsory methods.
+
+---
+
+# Q6. Can an Interface extend another Interface?
+
+## Answer
+
+Yes.
+
+Interfaces can inherit from other interfaces using `extends`.
+
+Example:
+
+```ts
+interface Person{
+
+    name: string;
+
+}
+
+interface Employee extends Person{
+
+    department: string;
+
+}
+```
+
+Now `Employee` contains:
+
+* `name`
+* `department`
+
+### Interview Point
+
+Interface inheritance is different from class inheritance.
+
+It extends the contract, not implementation.
+
+---
+
+# Q7. Why do Interfaces support multiple inheritance but Classes do not?
+
+## Answer
+
+Interfaces contain only contracts, so there is no implementation conflict.
+
+Example:
+
+```ts
+class User implements Login, Logout{
+
+}
+```
+
+Both interfaces simply declare methods.
+
+If classes supported multiple inheritance:
+
+```text
+Class A
+↓
+
+display()
+
+Class B
+↓
+
+display()
+```
+
+The child class would not know which implementation to inherit.
+
+This is called the **Diamond Problem**.
+
+### Interview Point
+
+* Interfaces → Multiple inheritance supported.
+* Classes → Single inheritance only.
+
+---
+
+# Q8. What is an Interface Reference?
+
+## Answer
+
+An interface reference can store an object of any class that implements that interface.
+
+Example:
+
+```ts
+interface Payment{
+
+    pay(): void;
+
+}
+
+class CreditCardPayment implements Payment{
+
+    pay(){
+
+        console.log("Payment Successful");
+
+    }
+
+}
+
+let payment: Payment = new CreditCardPayment();
+
+payment.pay();
+```
+
+### Interview Point
+
+Only members declared in the interface can be accessed through the interface reference.
+
+---
+
+# Q9. How are Interfaces used in Playwright Frameworks?
+
+## Answer
+
+Interfaces are commonly used to define contracts between different components.
+
+Examples:
+
+* Page Contracts
+* API Service Contracts
+* Repository Pattern
+* Dependency Injection
+* Mock Objects for Unit Testing
+
+Example:
+
+```ts
+interface LoginActions{
+
+    login(): void;
+
+}
+
+class LoginPage implements LoginActions{
+
+    login(){
+
+        console.log("Login");
+
+    }
+
+}
+```
+
+### Interview Point
+
+Interfaces improve maintainability and loose coupling in large automation frameworks.
+
+---
+
+# Q10. When should you choose an Interface instead of an Abstract Class?
+
+## Answer
+
+Choose an **Interface** when:
+
+* You only need to define a contract.
+* Different classes will implement the behavior differently.
+* No common implementation is required.
+* Multiple contracts are needed.
+
+Choose an **Abstract Class** when:
+
+* You want to share common code.
+* You need constructors or common properties.
+* You want both reusable code and compulsory methods.
+
+### Interview Point
+
+A common guideline:
+
+* Interface = Rules.
+* Abstract Class = Rules + Shared implementation.
+
+---
+
+# Quick Interview Revision
+
+| Question                                          | One-Line Answer                                                                      |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| What is an Interface?                             | A contract that defines required properties and methods.                             |
+| `implements` vs `extends`?                        | `implements` follows a contract; `extends` inherits implementation.                  |
+| Can a class implement multiple interfaces?        | Yes.                                                                                 |
+| Can an interface extend another interface?        | Yes.                                                                                 |
+| Interface vs Abstract Class?                      | Interface = contract only; Abstract Class = contract + partial implementation.       |
+| Why multiple interfaces but not multiple classes? | Interfaces have no implementation conflict; classes would cause the Diamond Problem. |
+| Interface reference?                              | An interface variable can hold an object of any implementing class.                  |
+| Playwright usage?                                 | Contracts for pages, services, APIs, dependency injection, and mocks.                |
+
