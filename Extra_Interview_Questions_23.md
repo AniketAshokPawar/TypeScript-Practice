@@ -329,3 +329,144 @@ Represents a situation where a value can never be produced. It is commonly used 
 **INTERVIEW ANSWER**
 
 `any`, `unknown`, and `never` have different purposes in TypeScript. `any` disables type checking and allows us to perform operations without TypeScript complaining, so it should generally be avoided. `unknown` can hold a value of any type, but we need to check or narrow its type before performing operations, which makes it safer than `any`. `never` represents a situation where a value can never be produced and is commonly used as the return type of functions that never complete normally, such as functions that always throw an error or run indefinitely.
+
+
+### Q.3 What is Type Inference in TypeScript?
+-------------------------------------
+
+**Type Inference** means TypeScript can **automatically determine the type of a variable based on the value assigned to it**, so we don't always need to explicitly specify the type.
+
+### Simple Example
+
+```
+let name = "Aniket";
+let age = 27;
+let isTester = true;
+```
+
+We did not explicitly write the types:
+
+```
+let name: string
+let age: number
+let isTester: boolean
+```
+
+But TypeScript automatically understands:
+
+```
+name     → string
+age      → number
+isTester → boolean
+```
+
+This is called **Type Inference**.
+
+For example:
+
+```
+let age = 27;
+
+age = "Aniket";  // ❌ TypeScript error
+```
+
+Why?
+
+Because TypeScript inferred `age` as a `number` from the initial value `27`.
+
+### Explicit Type vs Type Inference
+
+Explicit type:
+
+```
+let age: number = 27;
+```
+
+Here, **we tell TypeScript** that `age` is a number.
+
+Type inference:
+
+```
+let age = 27;
+```
+
+Here, **TypeScript automatically determines** that `age` is a number.
+
+### Interview Answer
+
+> **Type inference is a TypeScript feature where TypeScript automatically determines the type of a variable based on its assigned value. This means we don't always need to explicitly specify the type.**
+
+### Easy way to remember
+
+**Explicit typing:**\
+Developer tells TypeScript the type.
+
+**Type inference:**\
+TypeScript figures out the type automatically.
+
+### Q.4 What is the difference between interface and type alias?
+
+`interface`
+-----------
+
+An `interface` is mainly used to define the **structure of an object**.
+
+Example:
+
+```
+interface User {
+    name: string;
+    age: number;
+}
+
+const user: User = {
+    name: "Aniket",
+    age: 27
+};
+```
+
+Here, `User` defines what properties a user object should have.
+
+* * * * *
+
+`type` alias
+------------
+
+A `type` alias can also define an object structure.
+
+```
+type User = {
+    name: string;
+    age: number;
+};
+
+const user: User = {
+    name: "Aniket",
+    age: 27
+};
+```
+
+So for a simple object, **both work almost the same way**.
+
+* * * * *
+
+Main Difference
+---------------
+
+The important difference is that `type` can represent **more than just object structures**.
+
+For example:
+
+```
+type ID = string | number;
+```
+
+This means `ID` can be either a string or a number.
+
+You can also create tuples, unions, intersections, etc. using `type`.
+
+```
+type Status = "Pass" | "Fail";
+```
+
+An `interface` is primarily designed for defining object/class structures.
