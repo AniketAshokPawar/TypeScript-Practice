@@ -910,3 +910,127 @@ Don't start with a textbook definition. Explain it like this:
 > **"In JavaScript and Playwright, many operations are asynchronous. For example, when we call `page.goto()` or `fetch()`, the operation takes some time to complete, so the method returns a Promise. A Promise represents the current result of that operation. Initially, it is pending while the operation is running. If the operation completes successfully, it becomes fulfilled, and if it fails, it becomes rejected.**
 >
 > **To work with the Promise easily, we use `async/await`. We mark the function as `async`, and inside it we use `await` before a Promise. `await` waits for that asynchronous operation to complete and gives us the actual result. An `async` function itself always returns a Promise."**
+
+### Q.9 What is optional chaining (`?.`)?
+Optional chaining (`?.`) is used when we want to access a property or call a method **without getting an error if the value before it is `null` or `undefined`**.
+
+### Simple example
+
+Suppose:
+
+```
+let user = {
+    name: "Aniket"
+};
+
+console.log(user.address.city);
+```
+
+This will cause a runtime error because `address` doesn't exist.
+
+Instead, we can write:
+
+```
+console.log(user.address?.city);
+```
+
+Now, if `address` is `undefined` or `null`, the result is simply `undefined` instead of throwing an error.
+
+### Q.10 What is Nullish Coalescing (`??`)?
+
+`??` is used when we want to provide a **default value if the value is `null` or `undefined`**.
+
+### Simple example
+
+```
+let username: string | null = null;
+
+let name = username ?? "Guest";
+
+console.log(name);
+```
+
+Output:
+
+```
+Guest
+```
+
+Because `username` is `null`, `"Guest"` is used.
+
+### Q. 11 What is the difference between `??` and `||`?
+
+The easiest difference is:
+
+**`??` checks only `null` and `undefined`.**
+
+**`||` checks whether the value is falsy.**
+
+### Simple example
+
+```
+let age = 0;
+
+console.log(age ?? 18);  // 0
+console.log(age || 18);  // 18
+```
+
+Why?
+
+With `??`:
+
+```
+0 is not null
+0 is not undefined
+```
+
+So it keeps `0`.
+
+With `||`:
+
+```
+0 is a falsy value
+```
+
+So it uses `18`.
+
+### What values does `||` consider falsy?
+
+Common ones are:
+
+```
+false
+0
+""
+null
+undefined
+NaN
+```
+
+But `??` only cares about:
+
+```
+null
+undefined
+```
+
+### Another example
+
+```
+let name = "";
+
+console.log(name ?? "Guest");  // ""
+console.log(name || "Guest");  // "Guest"
+```
+
+The empty string is a valid value, so `??` keeps it, while `||` replaces it.
+
+### Easy way to remember
+
+**`??` → "Is it null or undefined?"**
+
+**`||` → "Is it falsy?"**
+
+### Interview Answer
+
+> **The main difference is that `??` returns the default value only when the left side is `null` or `undefined`, whereas `||` returns the default value for any falsy value such as `0`, `false`, or an empty string.**
