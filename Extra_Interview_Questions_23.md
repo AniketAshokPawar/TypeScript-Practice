@@ -470,3 +470,443 @@ type Status = "Pass" | "Fail";
 ```
 
 An `interface` is primarily designed for defining object/class structures.
+
+### Q.5 What are Union Types and Intersection Types?
+--------------------------------------------
+
+Both are used when we want a variable or object to have **multiple types**, but they work differently.
+
+### 1\. Union Type (`|`)
+
+A **Union Type** means a value can be **one of multiple types**.
+
+We use the `|` symbol.
+
+Example:
+
+```
+let userId: string | number;
+
+userId = "A101";  // ✅
+userId = 101;     // ✅
+```
+
+Here, `userId` can be **either a string or a number**.
+
+Think:
+
+> **Union = OR**
+
+### 2\. Intersection Type (`&`)
+
+An **Intersection Type** combines multiple types into **one type**.
+
+We use the `&` symbol.
+
+Example:
+
+```
+type Person = {
+    name: string;
+};
+
+type Employee = {
+    employeeId: number;
+};
+
+type EmployeeDetails = Person & Employee;
+```
+
+Now `EmployeeDetails` must contain **both** `name` and `employeeId`.
+
+```
+const employee: EmployeeDetails = {
+    name: "Aniket",
+    employeeId: 101
+};
+```
+
+If we omit either property, TypeScript gives an error.
+
+Think:
+
+> **Intersection = AND**
+
+### Q.6 What is Type Assertion (`as`) in TypeScript?
+--------------------------------------------
+
+**Type Assertion** is used when we want to tell TypeScript:
+
+> "I know the type of this value better than you do."
+
+We use the `as` keyword.
+
+### Simple Example
+
+```
+let value: unknown = "Hello";
+
+let message = value as string;
+
+console.log(message.toUpperCase());
+```
+
+Here, TypeScript initially sees:
+
+```
+value → unknown
+```
+
+We know that the actual value is a string, so we tell TypeScript:
+
+```
+value as string
+```
+
+Now TypeScript treats `message` as a `string`, so `toUpperCase()` is allowed.
+
+### Important Point
+
+Type assertion **does not change the actual value or convert its type**.
+
+For example:
+
+```
+let value: unknown = 100;
+
+let message = value as string;
+```
+
+This does NOT convert `100` into `"100"`.
+
+It only tells TypeScript to **treat the value as a string during type checking**.
+
+So remember:
+
+**Type Assertion (`as`) → "I know what the type is; trust me."**
+
+### Type Assertion vs Type Checking
+
+Type assertion:
+
+```
+const value = data as string;
+```
+
+We are telling TypeScript what we believe the type is.
+
+Type checking:
+
+```
+if (typeof data === "string") {
+    console.log(data.toUpperCase());
+}
+```
+
+Here, we actually check the type at runtime.
+
+### Interview Answer
+
+> **Type assertion in TypeScript is a way of telling the compiler to treat a value as a specific type using the `as` keyword. It is useful when we know more about the type than TypeScript does. However, type assertion does not perform type conversion or change the actual value.**
+
+### Q.7 WHAT IS THE DIFFERENCE BETWEEN `null` AND `undefined`?
+
+`undefined` means a variable has been declared but no value has been assigned to it.
+
+Example:
+
+let age;
+
+console.log(age);  // undefined
+
+`null` means we intentionally assign "no value" to a variable.
+
+Example:
+
+let age: number | null = null;
+
+console.log(age);  // null
+
+Simple difference:
+
+`undefined` → No value assigned yet.
+
+`null` → Intentionally no value.
+
+***INTERVIEW ANSWER:***
+
+`undefined` means a value has not been assigned, while `null` is an explicitly assigned value that represents "no value."
+
+### Q. 8 What does an `async` function return? What is a Promise and how is it related to `async/await`?
+
+### 1\. Start with a normal function
+
+Suppose we have:
+
+```
+function login() {
+    console.log("Login successful");
+}
+
+login();
+```
+
+This is simple. The function runs and finishes.
+
+Now imagine that login involves sending a request to a server. We **don't get the result immediately** because the server needs some time to respond.
+
+That's where `Promise` comes in.
+
+### 2\. A function that performs an asynchronous operation
+
+For example:
+
+```
+async function login() {
+    const response = await fetch("https://example.com/login");
+
+    console.log("Login response received");
+}
+```
+
+Here we have two important keywords:
+
+-   `async`
+-   `await`
+
+Let's understand what each one is doing.
+
+### 3\. What does `async` do?
+
+When we write:
+
+```
+async function login() {
+    ...
+}
+```
+
+we are telling JavaScript:
+
+> "This function is going to perform asynchronous work."
+
+Most importantly, an `async` function **always returns a Promise**.
+
+For example:
+
+```
+async function getName() {
+    return "Aniket";
+}
+```
+
+Even though we wrote:
+
+```
+return "Aniket";
+```
+
+the function doesn't actually return just `"Aniket"`.
+
+It returns a:
+
+```
+Promise
+```
+
+which will eventually contain `"Aniket"`.
+
+You can see this with:
+
+```
+const result = getName();
+
+console.log(result);
+```
+
+You will see a Promise rather than simply `"Aniket"`.
+
+### 4\. So what is a Promise actually?
+
+Think about ordering food at a restaurant.
+
+You order food.
+
+The waiter doesn't immediately give you the food.
+
+Instead, you get something like:
+
+> "Your order has been accepted. We will give you the food when it is ready."
+
+That is similar to a **Promise**.
+
+The Promise is basically an object representing the **status/result of an operation that is currently being processed**.
+
+For example:
+
+```
+const result = fetch("https://example.com");
+```
+
+`fetch()` needs to communicate with the server.
+
+At the moment you call `fetch()`, the response may not have arrived yet.
+
+So `fetch()` gives you a **Promise**.
+
+### 5\. Now the three Promise states make sense
+
+When you call:
+
+```
+const result = fetch("https://example.com");
+```
+
+initially, the request is still being processed.
+
+That Promise is:
+
+**Pending**
+
+Meaning:
+
+> "The server hasn't given us the result yet."
+
+If the server responds successfully:
+
+**Fulfilled**
+
+Meaning:
+
+> "The operation completed successfully, and here is the result."
+
+If something goes wrong, such as a network failure:
+
+**Rejected**
+
+Meaning:
+
+> "The operation failed."
+
+So you can think:
+
+```
+fetch() called
+    ↓
+Pending
+    ↓
+Server responds successfully → Fulfilled
+    OR
+Something goes wrong → Rejected
+```
+
+You don't manually decide whether it's pending or fulfilled. **JavaScript/Promise machinery tracks the state based on what happens with the asynchronous operation.**
+
+### 6\. Now where does `await` come in?
+
+Suppose:
+
+```
+async function getData() {
+    const response = await fetch("https://example.com");
+
+    console.log("Response received");
+}
+```
+
+Here:
+
+```
+fetch("https://example.com")
+```
+
+returns a Promise.
+
+`await` tells JavaScript:
+
+> "Wait here until this Promise is completed, then give me the actual result."
+
+So:
+
+```
+const response = await fetch("https://example.com");
+```
+
+means:
+
+> Start the request → wait for its Promise to complete → store the actual response in `response`.
+
+That's why we don't have to manually deal with the Promise result in most cases.
+
+### 7\. What if the Promise fails?
+
+For example:
+
+```
+async function getData() {
+    try {
+        const response = await fetch("https://example.com");
+
+        console.log(response);
+    }
+    catch (error) {
+        console.log("Request failed");
+    }
+}
+```
+
+If the request succeeds, `await` gives us the response.
+
+If the Promise is rejected, the `await` expression throws an error, which we can handle using `try/catch`.
+
+### 8\. Now connect this to Playwright
+
+This is exactly why you see `async/await` everywhere in Playwright.
+
+For example:
+
+```
+test("Login", async ({ page }) => {
+
+    await page.goto("https://example.com");
+
+    await page.locator("#username").fill("admin");
+
+    await page.locator("#password").fill("admin123");
+
+    await page.locator("#loginBtn").click();
+
+});
+```
+
+Methods such as:
+
+```
+page.goto()
+page.fill()
+page.click()
+```
+
+perform asynchronous operations and return Promises.
+
+So we use:
+
+```
+await page.goto(...)
+```
+
+to wait for that operation to complete before moving to the next statement.
+
+And because we use `await`, the test function itself is written as:
+
+```
+async ({ page }) => {
+```
+
+### The interview explanation I'd recommend you give
+
+Don't start with a textbook definition. Explain it like this:
+
+> **"In JavaScript and Playwright, many operations are asynchronous. For example, when we call `page.goto()` or `fetch()`, the operation takes some time to complete, so the method returns a Promise. A Promise represents the current result of that operation. Initially, it is pending while the operation is running. If the operation completes successfully, it becomes fulfilled, and if it fails, it becomes rejected.**
+>
+> **To work with the Promise easily, we use `async/await`. We mark the function as `async`, and inside it we use `await` before a Promise. `await` waits for that asynchronous operation to complete and gives us the actual result. An `async` function itself always returns a Promise."**
