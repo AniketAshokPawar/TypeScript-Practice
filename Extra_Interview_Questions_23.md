@@ -1204,3 +1204,152 @@ Enums are used to define a fixed set of related values, such as DEV, QA, and PRO
 ### How to explain it in an interview
 
 > **"We use enums when we have a fixed set of related values. For example, in an automation framework, if we have three environments --- DEV, QA, and PROD --- we can create an enum for them. This gives us predefined values and prevents mistakes such as passing an invalid environment name."**
+
+
+### Q.14 WHAT ARE TUPLES IN TYPESCRIPT? WHAT IS THE DIFFERENCE BETWEEN AN ARRAY AND A TUPLE?
+
+A Tuple is used when we want an array with a fixed number of elements and a fixed type for each position.
+
+For example:
+```
+let user: [string, number] = ["Aniket", 27];
+```
+Here:
+
+- First value must be a string.
+
+- Second value must be a number.
+
+So the order and types are fixed.
+```
+user = ["Rahul", 30];  // ✅
+
+user = [30, "Rahul"];  // ❌
+```
+
+
+An Array usually stores multiple values of the same type, and its length can change.
+
+Example:
+```
+let numbers: number[] = [10, 20, 30];
+```
+A Tuple has a fixed structure, where each position can have a specific type.
+
+Example:
+```
+let user: [string, number] = ["Aniket", 27];
+```
+Simple difference:
+
+Array → Multiple values of the same type; length can vary.
+
+Tuple → Fixed number of values with a specific type for each position.
+
+INTERVIEW ANSWER:
+
+A Tuple is a special type of array where the number of elements and the type of each position are fixed. An Array is generally used for a collection of similar values, while a Tuple is used when each position has a specific meaning and type.
+
+### Q.15 WHAT IS A SET IN JAVASCRIPT/TYPESCRIPT? HOW IS IT DIFFERENT FROM AN ARRAY?
+
+A Set is a collection that stores only unique values. If we add the same value multiple times, it is stored only once.
+
+Example:
+
+const numbers = new Set([10, 20, 20, 30]);
+
+console.log(numbers);
+
+// Set { 10, 20, 30 }
+
+This is useful when we want to remove duplicate values.
+
+Example in automation:
+
+const browsers = new Set(["Chrome", "Firefox", "Chrome"]);
+
+Now the Set contains only:
+
+Chrome
+
+Firefox
+
+Difference between Set and Array:
+
+Array → Allows duplicate values and supports index-based access.
+
+Set → Stores only unique values and does not use indexes.
+
+Example:
+
+const arr = ["Chrome", "Firefox", "Chrome"];
+
+console.log(arr[0]);  // Chrome
+
+const set = new Set(["Chrome", "Firefox", "Chrome"]);
+
+// Duplicate Chrome is removed.
+
+### Q.16 WHAT IS A MAP IN JAVASCRIPT/TYPESCRIPT? HOW IS IT DIFFERENT FROM AN OBJECT?
+
+A Map is a collection that stores data as key-value pairs.
+
+Example:
+```
+const users = new Map();
+
+users.set("user1", "Aniket");
+
+users.set("user2", "Rahul");
+
+console.log(users.get("user1"));  // Aniket
+```
+Here:
+```
+"user1" → key
+
+"Aniket" → value
+```
+A Map is useful when we frequently need to add, remove, or search data using keys.
+
+Difference between Map and Object:
+
+Object → Mainly uses string or symbol keys.
+
+Map → Can use any type of value as a key, such as string, number, or object.
+
+Example:
+```
+const map = new Map();
+
+map.set(101, "Aniket");
+
+map.set("user", "Rahul");
+```
+Both number and string keys are allowed.
+
+With an Object:
+```
+const user = {
+
+    name: "Aniket",
+
+    age: 27
+
+};
+```
+Object keys are generally strings or symbols.
+
+Simple difference:
+
+Array → Collection of values, duplicates allowed.
+
+Set → Collection of unique values.
+
+Object → Key-value data, mainly used to represent an entity.
+
+Map → Key-value collection designed for frequent adding, removing, and searching using keys.
+
+INTERVIEW ANSWER:
+
+A Set stores unique values, whereas an Array can contain duplicate values and provides index-based access. A Map stores key-value pairs and allows keys of different types, while an Object is mainly used to represent structured data with string or symbol keys.
