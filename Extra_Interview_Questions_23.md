@@ -1034,3 +1034,173 @@ The empty string is a valid value, so `??` keeps it, while `||` replaces it.
 ### Interview Answer
 
 > **The main difference is that `??` returns the default value only when the left side is `null` or `undefined`, whereas `||` returns the default value for any falsy value such as `0`, `false`, or an empty string.**
+
+### Q.12 WHAT IS `typeof` IN TYPESCRIPT AND HOW CAN IT BE USED FOR TYPE NARROWING?
+
+`typeof` is used to check the type of a value at runtime.
+
+It is useful for type narrowing when a variable can have multiple types.
+
+Example:
+```
+let value: string | number = "Aniket";
+
+if (typeof value === "string") {
+
+    console.log(value.toUpperCase());
+
+} else {
+
+    console.log(value.toFixed(2));
+
+}
+```
+Here, TypeScript knows that inside the `if` block, `value` is a string.
+
+Inside the `else` block, `value` must be a number.
+
+So, `typeof` helps TypeScript narrow a variable from multiple possible types to a specific type.
+
+Common checks:
+```
+typeof value === "string"
+
+typeof value === "number"
+
+typeof value === "boolean"
+```
+INTERVIEW ANSWER:
+
+`typeof` is used to check the type of a value at runtime. In TypeScript, it can be used for type narrowing when a variable has multiple possible types. For example, if a variable is `string | number`, checking `typeof value === "string"` allows TypeScript to treat it as a string inside that block.
+
+WHAT IS THE `in` OPERATOR AND HOW CAN IT BE USED FOR TYPE NARROWING?
+
+The `in` operator checks whether a particular property exists in an object.
+
+It is especially useful when we have two different object types and need to determine which type we are dealing with.
+
+Example:
+```
+type User = {
+
+    name: string;
+
+};
+
+type Admin = {
+
+    name: string;
+
+    permissions: string[];
+
+};
+
+function printDetails(person: User | Admin) {
+
+    if ("permissions" in person) {
+
+        console.log(person.permissions);
+
+    } else {
+
+        console.log(person.name);
+
+    }
+
+}
+```
+Here, TypeScript checks whether the `permissions` property exists.
+
+If it exists, TypeScript knows that `person` is an `Admin`.
+
+If it doesn't exist, TypeScript knows that `person` is a `User`.
+
+So:
+
+`typeof` → checks the type of a value.
+
+`in` → checks whether a property exists in an object.
+
+INTERVIEW ANSWER:
+
+`typeof` is used to check whether a value is a string, number, or boolean, while the `in` operator is used to check whether a particular property exists in an object
+
+WHAT ARE ENUMS IN TYPESCRIPT?
+
+An enum is used when we have a fixed set of related values that should be predefined.
+
+For example, in an automation framework, we may have three environments:
+
+enum Environment {
+
+    DEV = "DEV",
+
+    QA = "QA",
+
+    PROD = "PROD"
+
+}
+
+Now we can use:
+
+let environment = Environment.QA;
+
+This prevents mistakes like passing an invalid environment name and makes the allowed values clear.
+
+Common examples:
+
+- Environment → DEV, QA, PROD
+
+- User Role → ADMIN, USER, GUEST
+
+- Browser → CHROME, FIREFOX, WEBKIT
+
+### Q. 13 WHAT IS THE DIFFERENCE BETWEEN NUMERIC AND STRING ENUMS?
+
+Numeric enums store numbers as their values.
+
+enum Environment {
+
+    DEV,
+
+    QA,
+
+    PROD
+
+}
+
+DEV = 0
+
+QA = 1
+
+PROD = 2
+
+If values are not specified, TypeScript automatically assigns numbers starting from 0.
+
+String enums store meaningful string values.
+
+enum Environment {
+
+    DEV = "DEV",
+
+    QA = "QA",
+
+    PROD = "PROD"
+
+}
+
+Here, Environment.QA contains the value "QA".
+
+Simple difference:
+
+Numeric enum → values are numbers and are automatically assigned by default.
+
+String enum → values are explicitly assigned strings and are easier to understand.
+
+INTERVIEW ANSWER:
+
+Enums are used to define a fixed set of related values, such as DEV, QA, and PROD environments. Numeric enums use numeric values, which are automatically assigned by default, while string enums use explicitly defined string values. String enums are generally more readable because the actual values are meaningful.
+
+### How to explain it in an interview
+
+> **"We use enums when we have a fixed set of related values. For example, in an automation framework, if we have three environments --- DEV, QA, and PROD --- we can create an enum for them. This gives us predefined values and prevents mistakes such as passing an invalid environment name."**
