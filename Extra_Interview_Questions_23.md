@@ -1353,3 +1353,174 @@ Map → Key-value collection designed for frequent adding, removing, and searchi
 INTERVIEW ANSWER:
 
 A Set stores unique values, whereas an Array can contain duplicate values and provides index-based access. A Map stores key-value pairs and allows keys of different types, while an Object is mainly used to represent structured data with string or symbol keys.
+
+### Q.17 WHAT ARE TYPE ANNOTATIONS?
+
+Type annotation means explicitly telling TypeScript what type of value a variable, parameter, or return value should have.
+
+Example:
+```
+let age: number = 27;
+
+let name: string = "Aniket";
+```
+Here, `number` and `string` are type annotations.
+
+If we try:
+```
+age = "27";  // ❌ Error
+```
+### Q.18 WHAT IS THE DIFFERENCE BETWEEN EXPLICIT AND IMPLICIT TYPING?
+
+Explicit typing means we explicitly specify the type.
+```
+let age: number = 27;
+```
+Here, we tell TypeScript that `age` is a number.
+
+Implicit typing means TypeScript automatically determines the type from the assigned value.
+```
+let age = 27;
+```
+TypeScript automatically understands that `age` is a number.
+
+Simple difference:
+
+Explicit → We specify the type.
+
+Implicit → TypeScript automatically determines the type.
+
+### Q.19 HOW DO YOU DEFINE TYPES FOR ARRAYS?
+
+We can define an array type using `type[]` or `Array<type>`.
+
+Example:
+```
+let numbers: number[] = [10, 20, 30];
+
+let names: string[] = ["Aniket", "Rahul"];
+```
+We can also write:
+```
+let numbers: Array<number> = [10, 20, 30];
+```
+### Q.20 HOW DO YOU DEFINE TYPES FOR OBJECT PROPERTIES?
+
+We specify the type of each property.
+
+Example:
+```
+let user: {
+
+    name: string;
+
+    age: number;
+
+} = {
+
+    name: "Aniket",
+
+    age: 27
+
+};
+```
+Here:
+
+- `name` must be a string.
+
+- `age` must be a number.
+
+If we write:
+
+age: "27";  // ❌ Error
+
+### Q.21 HOW DO YOU DEFINE OPTIONAL PROPERTIES IN AN OBJECT?
+
+We use `?` after the property name.
+
+Example:
+```
+let user: {
+
+    name: string;
+
+    age?: number;
+
+} = {
+
+    name: "Aniket"
+
+};
+```
+Here, `age` is optional, so the object can contain it or not.
+
+Both are valid:
+``
+{
+
+    name: "Aniket"
+
+}
+
+{
+
+    name: "Aniket",
+
+    age: 27
+
+}
+```
+
+### Q.22 WHAT ARE TYPE ALIASES?
+
+A Type Alias allows us to create a custom name for a type.
+
+Instead of writing the object structure repeatedly:
+
+let user1: {
+
+    name: string;
+
+    age: number;
+
+};
+
+let user2: {
+
+    name: string;
+
+    age: number;
+
+};
+
+We can create a type alias:
+
+type User = {
+
+    name: string;
+
+    age: number;
+
+};
+
+Now we can reuse it:
+
+let user1: User = {
+
+    name: "Aniket",
+
+    age: 27
+
+};
+
+let user2: User = {
+
+    name: "Rahul",
+
+    age: 30
+
+};
+
+***INTERVIEW ANSWER:***
+
+A type alias allows us to give a name to a type and reuse it throughout the application. It is especially useful for defining the structure of objects and keeping the code clean and maintainable.
