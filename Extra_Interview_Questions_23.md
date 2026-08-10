@@ -1524,3 +1524,44 @@ let user2: User = {
 ***INTERVIEW ANSWER:***
 
 A type alias allows us to give a name to a type and reuse it throughout the application. It is especially useful for defining the structure of objects and keeping the code clean and maintainable.
+
+### Q.23 WHAT ARE GENERICS IN TYPESCRIPT?
+
+Generics allow us to write reusable code that can work with different types while still maintaining type safety.
+
+Instead of creating separate functions for different types, we can create one function that works with any type.
+
+Example:
+
+function getValue<T>(value: T): T {
+    return value;
+}
+
+let number = getValue<number>(10);
+let name = getValue<string>("Aniket");
+
+Here, `T` is a placeholder for a type.
+
+When we call the function with `number`, T becomes `number`.
+
+When we call it with `string`, T becomes `string`.
+
+The important point is that the actual type is preserved.
+
+Without Generics, we might use `any`:
+
+function getValue(value: any): any {
+    return value;
+}
+
+But `any` removes type safety.
+
+Generics allow us to accept different types while still knowing the actual type.
+
+PLAYWRIGHT EXAMPLE:
+
+Generics are commonly used in TypeScript frameworks when we want reusable functions or classes that should work with different types of test data.
+
+INTERVIEW ANSWER:
+
+Generics allow us to create reusable and type-safe code that can work with different types. We use a type parameter such as `T`, and the actual type is provided when the function, class, or method is used. This gives us flexibility without losing type safety.
