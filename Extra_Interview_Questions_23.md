@@ -1532,14 +1532,14 @@ Generics allow us to write reusable code that can work with different types whil
 Instead of creating separate functions for different types, we can create one function that works with any type.
 
 Example:
-
+```
 function getValue<T>(value: T): T {
     return value;
 }
 
 let number = getValue<number>(10);
 let name = getValue<string>("Aniket");
-
+```
 Here, `T` is a placeholder for a type.
 
 When we call the function with `number`, T becomes `number`.
@@ -1549,11 +1549,11 @@ When we call it with `string`, T becomes `string`.
 The important point is that the actual type is preserved.
 
 Without Generics, we might use `any`:
-
+```
 function getValue(value: any): any {
     return value;
 }
-
+```
 But `any` removes type safety.
 
 Generics allow us to accept different types while still knowing the actual type.
@@ -1562,6 +1562,58 @@ PLAYWRIGHT EXAMPLE:
 
 Generics are commonly used in TypeScript frameworks when we want reusable functions or classes that should work with different types of test data.
 
-INTERVIEW ANSWER:
+***INTERVIEW ANSWER:***
 
 Generics allow us to create reusable and type-safe code that can work with different types. We use a type parameter such as `T`, and the actual type is provided when the function, class, or method is used. This gives us flexibility without losing type safety.
+
+### Q.24 WHAT IS THE DIFFERENCE BETWEEN COMPILE-TIME ERRORS AND RUNTIME ERRORS?
+
+Compile-time error:
+
+An error detected before the program starts running.
+
+Example:
+```
+let age: number = "27";
+```
+TypeScript detects that "27" is a string but `age` should be a number.
+
+So we get an error while writing/compiling the code, before the test runs.
+
+Runtime error:
+
+An error that occurs while the program is actually running.
+
+Example:
+```
+let value: any = 10;
+
+console.log(value.toUpperCase());
+```
+TypeScript allows this because `value` is `any`.
+
+But when the code runs, JavaScript tries to call `toUpperCase()` on a number and throws an error.
+
+Simple difference:
+
+Compile-time error → Error found before execution.
+
+Runtime error → Error occurs during execution.
+
+PLAYWRIGHT EXAMPLE:
+
+Compile-time:
+```
+await page.locator("#username").fill(123);
+```
+// TypeScript error because fill() expects a string.
+
+Runtime:
+```
+await page.locator("#username-not-found").click();
+```
+// Code can compile, but while running the test, Playwright may report that the locator/element could not be found.
+
+***INTERVIEW ANSWER:***
+
+"Compile-time errors are detected before the code executes, usually by TypeScript, such as passing a number where a string is expected. Runtime errors occur while the code is executing, such as trying to perform an operation on an invalid value or when a Playwright element cannot be found."
