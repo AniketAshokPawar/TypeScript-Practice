@@ -1469,14 +1469,14 @@ Both are valid:
     age: 27
 
 }
-```
+
 
 ### Q.22 WHAT ARE TYPE ALIASES?
 
 A Type Alias allows us to create a custom name for a type.
 
 Instead of writing the object structure repeatedly:
-
+```
 let user1: {
 
     name: string;
@@ -1492,9 +1492,9 @@ let user2: {
     age: number;
 
 };
-
+```
 We can create a type alias:
-
+```
 type User = {
 
     name: string;
@@ -1502,9 +1502,9 @@ type User = {
     age: number;
 
 };
-
+```
 Now we can reuse it:
-
+```
 let user1: User = {
 
     name: "Aniket",
@@ -1520,7 +1520,7 @@ let user2: User = {
     age: 30
 
 };
-
+```
 ***INTERVIEW ANSWER:***
 
 A type alias allows us to give a name to a type and reuse it throughout the application. It is especially useful for defining the structure of objects and keeping the code clean and maintainable.
